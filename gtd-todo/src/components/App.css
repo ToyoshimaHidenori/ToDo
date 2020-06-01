@@ -1,3 +1,44 @@
+body {
+  margin: 0;
+  background: #e0dfea;
+  color: #6595d8;
+}
+
 .App {
   text-align: center;
+  background: #e0dfea;
+}
+
+svg {
+  fill: currentColor;
+}
+
+.App button {
+  border-radius: 12px;
+  /* background: #e0dfea;
+	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: #e0dfea;
+  box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #6595d8;
+  margin: 15px;
+  padding: 7px 20px 7px 20px;
+  border-style: none;
+  outline: none;
+
+  transition-duration: 0.7s;
+}
+
+.App button:hover {
+  /* background: linear-gradient(145deg, #f0effa, #cac9d3);
+	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: linear-gradient(145deg, #cac9d3, #f0effa);
+  box-shadow: 5px 5px 10px #cccbd5, -5px -5px 10px #f4f3ff;
+  color: #1c64ff;
+}
+
+.App button:active {
+  background: #e0dfea;
+  box-shadow: inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
 }

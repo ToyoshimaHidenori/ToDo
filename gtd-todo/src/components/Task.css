@@ -1,0 +1,87 @@
+.UncheckedButton button {
+  color: salmon;
+  font-size: large;
+}
+
+.Task button {
+  border-radius: 20px;
+  /* background: #e0dfea;
+  box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: #e0dfea;
+  box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #aaaaaa;
+  margin: 15px;
+  padding: 7px 7px 3px 7px;
+  border-style: none;
+  outline: none;
+
+  transition-duration: 0.7s;
+}
+
+.Task button:hover {
+  /* background: linear-gradient(145deg, #f0effa, #cac9d3);
+  box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: linear-gradient(145deg, #cac9d3, #f0effa);
+  box-shadow: 5px 5px 10px #cccbd5, -5px -5px 10px #f4f3ff;
+  color: #89adfc;
+}
+
+.Task button:active {
+  background: #e0dfea;
+  box-shadow: inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
+}
+
+.Task {
+  border-radius: 36px;
+  background: #e0dfea;
+  box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff;
+  padding: 10px;
+  margin: 30px 20% 30px 20%;
+
+  border: 2px solid #e0dfea;
+  transition-duration: 1.2s;
+}
+
+.Task:hover {
+  box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff,
+    inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
+}
+
+.Task input {
+  border-radius: 11px;
+  background: #e0dfea;
+  box-shadow: inset 3px 3px 6px #9f9ea6, inset -3px -3px 6px #ffffff;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #6595d8;
+  margin: 10px;
+  padding: 7px 7px 3px 7px;
+  border-style: none;
+  outline: none;
+
+  transition-duration: 0.5s;
+}
+
+.Task input:focus {
+  color: #026efa;
+}
+.Task input:hover {
+  color: #026efa;
+}
+
+.Task select {
+  border-radius: 11px;
+  background: #e0dfea;
+  box-shadow: inset 3px 3px 6px #9f9ea6, inset -3px -3px 6px #ffffff;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #6595d8;
+  margin: 10px;
+  padding: 7px 7px 3px 7px;
+  border-style: none;
+  outline: none;
+
+  transition-duration: 0.5s;
+}

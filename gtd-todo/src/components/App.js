@@ -6,13 +6,15 @@ const App = (props) => {
   const [taskState, setTaskState] = useState({
     todayTasks: [
       {
-        name: "Sample",
+        id: "asdfas",
+        name: "Sample1",
         isDone: false,
         endTime: Date.parse(2020 / 10 / 21),
         taskMinites: 30,
         rank: "A",
       },
       {
+        id: "afffdjkdk",
         name: "Sample2",
         isDone: false,
         endTime: Date(),
@@ -22,7 +24,7 @@ const App = (props) => {
     ],
   });
 
-  const addTaskHandler = () => {
+  const resetTaskHandler = () => {
     setTaskState({
       todayTasks: [
         {
@@ -41,16 +43,20 @@ const App = (props) => {
           taskMinites: 30,
           rank: "B",
         },
-        {
-          id: "afffdfdjkdk",
-          name: "Sample3",
-          isDone: false,
-          endTime: Date(),
-          taskMinites: 30,
-          rank: "B",
-        },
       ],
     });
+  };
+  const addTaskHandler = () => {
+    const todayTasks = taskState.todayTasks;
+    todayTasks.push({
+      id: Math.random().toString(32).substring(2),
+      name: "new task",
+      isDone: false,
+      endTime: Date(),
+      taskMinites: 30,
+      rank: "B",
+    });
+    setTaskState({ todayTasks });
   };
 
   const toggleDoneHandler = (event, id) => {
@@ -79,6 +85,32 @@ const App = (props) => {
     setTaskState({ todayTasks: todayTasks });
   };
 
+  const taskMinitesChangedHandler = (event, id) => {
+    const todayTaskIndex = taskState.todayTasks.findIndex((t) => {
+      return t.id === id;
+    });
+    const todayTask = {
+      ...taskState.todayTasks[todayTaskIndex],
+    };
+    todayTask.taskMinites = event.target.value;
+    const todayTasks = [...taskState.todayTasks];
+    todayTasks[todayTaskIndex] = todayTask;
+    setTaskState({ todayTasks: todayTasks });
+  };
+
+  const rankChangedHandler = (event, id) => {
+    const todayTaskIndex = taskState.todayTasks.findIndex((t) => {
+      return t.id === id;
+    });
+    const todayTask = {
+      ...taskState.todayTasks[todayTaskIndex],
+    };
+    todayTask.rank = event.target.value;
+    const todayTasks = [...taskState.todayTasks];
+    todayTasks[todayTaskIndex] = todayTask;
+    setTaskState({ todayTasks: todayTasks });
+  };
+
   const deleteTaskHandler = (taskIndex) => {
     // const todayTasks = taskState.todayTasks.slice();
     const todayTaskstmp = taskState.todayTasks;
@@ -89,7 +121,7 @@ const App = (props) => {
   return (
     <div className="App">
       <h1>This is GTD todo</h1>
-      <button onClick={addTaskHandler}> button </button>
+      <button onClick={resetTaskHandler}> reset </button>
       {taskState.todayTasks.map((todayTask, index) => {
         return (
           <Task
@@ -98,12 +130,21 @@ const App = (props) => {
             isDone={todayTask.isDone}
             endTime={todayTask.endTime}
             rank={todayTask.rank}
+            taskMinites={todayTask.taskMinites}
+            taskMinitesChange={(event) =>
+              taskMinitesChangedHandler(event, todayTask.id)
+            }
             done={(event) => toggleDoneHandler(event, todayTask.id)}
             delete={() => deleteTaskHandler(index)}
+            rankChange={(event) => rankChangedHandler(event, todayTask.id)}
             change={(event) => nameChangedHandler(event, todayTask.id)}
           />
         );
       })}
+
+      <div>
+        <button onClick={addTaskHandler}>addTask</button>
+      </div>
     </div>
   );
 };
