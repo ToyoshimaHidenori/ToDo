@@ -59,7 +59,7 @@ svg {
       inset 0px 0px 0px #afaeb7, inset 0px 0px 0px #ffffff;
   }
   100% {
-    box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff,
+    box-shadow: 10px 10px 15px #bab9c2, -10px -10px 15px #ffffff,
       inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
   }
 }
@@ -70,12 +70,23 @@ progress {
   color: #1c64ff;
   margin: 2em auto;
   padding: 4px;
-  border: 3px solid #e0dfea;
-  box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff,
+  border: 2px solid #e0dfea;
+  box-shadow: 10px 10px 15px #bab9c2, -10px -10px 15px #ffffff,
     inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
-  border-radius: 14px;
+  border-radius: 10px;
   transition-duration: 1.2s;
-  width: 70%;
+  width: 95%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  progress {
+    width: 68%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  progress {
+    width: 68%;
+  }
 }
 progress::-moz-progress-bar {
   border-radius: 12px;
