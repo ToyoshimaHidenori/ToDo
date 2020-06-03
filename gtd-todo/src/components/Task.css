@@ -6,9 +6,21 @@
     box-shadow: 0px 0px 0px #bab9c2, 0px 0px 0px #ffffff;
   }
   100% {
-    box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff;
+    box-shadow: 10px 10px 15px #bab9c2, -10px -10px 15px #ffffff;
   }
 }
+@keyframes showr {
+  0% {
+    box-shadow: 0px 0px 0px #bab9c2, 0px 0px 0px #ffffff;
+  }
+  40% {
+    box-shadow: 0px 0px 0px #bab9c2, 0px 0px 0px #ffffff;
+  }
+  100% {
+    box-shadow: 5px 5px 25px #bab9c2, -5px -5px 25px #ffffff;
+  }
+}
+
 @keyframes showt {
   0% {
     box-shadow: 0px 0px 0px #afaeb7, 0px 0px 0px #ffffff;
@@ -30,9 +42,16 @@
   }
 }
 
-.UncheckedButton button {
-  color: salmon;
-  font-size: large;
+.Task .Trash {
+  animation: showr 2s;
+  background: #e0dfea;
+  box-shadow: 5px 5px 25px #bab9c2, -5px -5px 25px #ffffff;
+  font-size: 0.6em;
+  font-weight: bold;
+  color: #aaaaaa;
+  margin: 6px;
+  margin-left: 20px;
+  padding: 6px 6px 4px 6px;
 }
 
 .Task button {
@@ -41,18 +60,22 @@
   /* background: #e0dfea;
   box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
   background: #e0dfea;
-  box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff;
-  font-size: 1.4em;
+  box-shadow: 10px 10px 15px #bab9c2, -10px -10px 15px #ffffff;
+  font-size: 0.8em;
   font-weight: bold;
   color: #aaaaaa;
-  margin: 15px;
-  padding: 7px 7px 3px 7px;
+  margin: 10px;
+  padding: 8px 8px 3px 8px;
   border-style: none;
   outline: none;
   border: 2px solid #e0dfea;
   transition-duration: 0.7s;
 }
-
+.Task .Checked .CheckBox {
+  color: #3272fc;
+  box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff,
+    inset 2px 2px 5px #bab9c2, inset -2px -2px 5px #ffffff;
+}
 .Task button:hover {
   /* background: linear-gradient(145deg, #f0effa, #cac9d3);
   box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
@@ -66,19 +89,56 @@
   box-shadow: inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
 }
 
-.Task {
+.Task .Unchecked {
   animation: showt 1s;
   border-radius: 36px;
   background: #e0dfea;
   box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff;
   padding: 10px;
-  margin: 30px 20% 30px 20%;
-
-  border: 2px solid #e0dfea;
+  margin: 20px 15px 20px 15px;
+  color: #999999;
+  border: 3px solid #e0dfea;
   transition-duration: 1.2s;
 }
 
-.Task:hover {
+.Task .Checked {
+  animation: showt 1s;
+  border-radius: 36px;
+  background: #e0dfea;
+  box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff,
+    inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
+  padding: 10px;
+  margin: 20px 15px 20px 15px;
+
+  border: 3px solid #88a4cf;
+  color: #999999;
+  transition-duration: 1.2s;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .Task {
+    margin: 30px 15% 30px 15%;
+  }
+  .Task input {
+    font-size: 2em;
+  }
+  .Task button {
+    font-size: 1.4em;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .Task {
+    margin: 30px 15% 30px 15%;
+  }
+  .Task input {
+    font-size: 2em;
+  }
+  .Task button {
+    font-size: 1.4em;
+  }
+}
+
+.Task .Unchecked:hover {
   box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff,
     inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
 }
@@ -88,11 +148,11 @@
   border-radius: 11px;
   background: #e0dfea;
   box-shadow: inset 3px 3px 6px #9f9ea6, inset -3px -3px 6px #ffffff;
-  font-size: 1.4em;
+  font-size: 1.8em;
   font-weight: bold;
   color: #6595d8;
   margin: 10px;
-  padding: 7px 7px 3px 7px;
+  padding: 5px 7px 3px 7px;
   border-style: none;
   outline: none;
 
@@ -104,11 +164,26 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 300px;
-  width: 60%;
+  width: 70%;
+}
+.Task .Checked input,
+.Task .Checked select {
+  color: #999999;
+}
+
+input::placeholder {
+  color: #a3a2aa;
 }
 
 .Task input[type="number"] {
-  max-width: 80px;
+  max-width: 70px;
+  font-weight: normal;
+  margin: 6px;
+  font-size: 1.28em;
+}
+
+.Task .InputNum {
+  display: inline-block;
 }
 
 .Task input:focus {
@@ -123,10 +198,10 @@
   border-radius: 11px;
   background: #e0dfea;
   box-shadow: inset 3px 3px 6px #9f9ea6, inset -3px -3px 6px #ffffff;
-  font-size: 1.4em;
-  font-weight: bold;
+  font-size: 1.1em;
+  font-weight: normal;
   color: #6595d8;
-  margin: 10px;
+  margin: 6px;
   padding: 7px 7px 3px 7px;
   border-style: none;
   outline: none;
