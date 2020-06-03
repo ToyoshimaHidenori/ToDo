@@ -139,15 +139,17 @@ const App = (props) => {
   return (
     <div className="App">
       <h1>This is GTD todo</h1>
+      <button onClick={resetTaskHandler}> reset </button>
+      <button onClick={calcProgress}> sync </button>
+      <p>
+        Total:{progressState[1]}min Done:{progressState[0]}min Undone:
+        {progressState[1] - progressState[0]}
+      </p>
       <progress
         id="progressbar"
         max={progressState[1]}
         value={progressState[0]}
       ></progress>
-      <p>Done:{progressState[0]}</p>
-      <p>ALL:{progressState[1]}</p>
-      <button onClick={resetTaskHandler}> reset </button>
-      <button onClick={calcProgress}> sync </button>
       {taskState.todayTasks.map((todayTask, index) => {
         if (!todayTask.isDone) {
           return (
