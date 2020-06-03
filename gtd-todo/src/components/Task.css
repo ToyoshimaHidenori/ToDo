@@ -1,9 +1,42 @@
+@keyframes showb {
+  0% {
+    box-shadow: 0px 0px 0px #bab9c2, 0px 0px 0px #ffffff;
+  }
+  40% {
+    box-shadow: 0px 0px 0px #bab9c2, 0px 0px 0px #ffffff;
+  }
+  100% {
+    box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff;
+  }
+}
+@keyframes showt {
+  0% {
+    box-shadow: 0px 0px 0px #afaeb7, 0px 0px 0px #ffffff;
+  }
+  100% {
+    box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff;
+  }
+}
+
+@keyframes showd {
+  0% {
+    box-shadow: inset 0px 0px 0px #9f9ea6, inset 0px 0px 0px #ffffff;
+  }
+  50% {
+    box-shadow: inset 0px 0px 0px #9f9ea6, inset 0px 0px 0px #ffffff;
+  }
+  100% {
+    box-shadow: inset 3px 3px 6px #9f9ea6, inset -3px -3px 6px #ffffff;
+  }
+}
+
 .UncheckedButton button {
   color: salmon;
   font-size: large;
 }
 
 .Task button {
+  animation: showb 2s;
   border-radius: 20px;
   /* background: #e0dfea;
   box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
@@ -16,7 +49,7 @@
   padding: 7px 7px 3px 7px;
   border-style: none;
   outline: none;
-
+  border: 2px solid #e0dfea;
   transition-duration: 0.7s;
 }
 
@@ -34,6 +67,7 @@
 }
 
 .Task {
+  animation: showt 1s;
   border-radius: 36px;
   background: #e0dfea;
   box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff;
@@ -50,6 +84,7 @@
 }
 
 .Task input {
+  animation: showd 2s;
   border-radius: 11px;
   background: #e0dfea;
   box-shadow: inset 3px 3px 6px #9f9ea6, inset -3px -3px 6px #ffffff;
@@ -84,6 +119,7 @@
 }
 
 .Task select {
+  animation: showd 2s;
   border-radius: 11px;
   background: #e0dfea;
   box-shadow: inset 3px 3px 6px #9f9ea6, inset -3px -3px 6px #ffffff;
