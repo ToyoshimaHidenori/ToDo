@@ -24,6 +24,8 @@ const App = (props) => {
     ],
   });
 
+  const [progressState, setProgressState] = useState([0, 60]);
+
   const resetTaskHandler = () => {
     setTaskState({
       todayTasks: [
@@ -45,18 +47,20 @@ const App = (props) => {
         },
       ],
     });
+    setProgressState([0, 60]);
   };
   const addTaskHandler = () => {
     const todayTasks = taskState.todayTasks;
     todayTasks.push({
       id: Math.random().toString(32).substring(2),
-      name: "new task",
+      name: "",
       isDone: false,
       endTime: Date(),
       taskMinites: 30,
       rank: "B",
     });
     setTaskState({ todayTasks });
+    calcProgress();
   };
 
   const toggleDoneHandler = (event, id) => {
@@ -70,6 +74,7 @@ const App = (props) => {
     const todayTasks = [...taskState.todayTasks];
     todayTasks[todayTaskIndex] = todayTask;
     setTaskState({ todayTasks: todayTasks });
+    calcProgress(setTimeout(1000));
   };
 
   const nameChangedHandler = (event, id) => {
@@ -96,6 +101,7 @@ const App = (props) => {
     const todayTasks = [...taskState.todayTasks];
     todayTasks[todayTaskIndex] = todayTask;
     setTaskState({ todayTasks: todayTasks });
+    calcProgress();
   };
 
   const rankChangedHandler = (event, id) => {
@@ -115,36 +121,78 @@ const App = (props) => {
     // const todayTasks = taskState.todayTasks.slice();
     const todayTaskstmp = taskState.todayTasks;
     todayTaskstmp.splice(taskIndex, 1);
-    setTaskState({ todayTasks: todayTaskstmp });
+    calcProgress(setTaskState({ todayTasks: todayTaskstmp }));
+  };
+
+  const calcProgress = () => {
+    let allTaskMin = 0;
+    let doneTaskMin = 0;
+    taskState.todayTasks.forEach((todayTask, index, array) => {
+      allTaskMin += Number(todayTask.taskMinites);
+      if (todayTask.isDone) {
+        doneTaskMin += Number(todayTask.taskMinites);
+      }
+    });
+    setProgressState([doneTaskMin, allTaskMin]);
   };
 
   return (
     <div className="App">
       <h1>This is GTD todo</h1>
+      <progress
+        id="progressbar"
+        max={progressState[1]}
+        value={progressState[0]}
+      ></progress>
+      <p>Done:{progressState[0]}</p>
+      <p>ALL:{progressState[1]}</p>
       <button onClick={resetTaskHandler}> reset </button>
+      <button onClick={calcProgress}> sync </button>
       {taskState.todayTasks.map((todayTask, index) => {
-        return (
-          <Task
-            key={todayTask.id}
-            name={todayTask.name}
-            isDone={todayTask.isDone}
-            endTime={todayTask.endTime}
-            rank={todayTask.rank}
-            taskMinites={todayTask.taskMinites}
-            taskMinitesChange={(event) =>
-              taskMinitesChangedHandler(event, todayTask.id)
-            }
-            done={(event) => toggleDoneHandler(event, todayTask.id)}
-            delete={() => deleteTaskHandler(index)}
-            rankChange={(event) => rankChangedHandler(event, todayTask.id)}
-            change={(event) => nameChangedHandler(event, todayTask.id)}
-          />
-        );
+        if (!todayTask.isDone) {
+          return (
+            <Task
+              key={todayTask.id}
+              name={todayTask.name}
+              isDone={todayTask.isDone}
+              endTime={todayTask.endTime}
+              rank={todayTask.rank}
+              taskMinites={todayTask.taskMinites}
+              taskMinitesChange={(event) =>
+                taskMinitesChangedHandler(event, todayTask.id)
+              }
+              done={(event) => toggleDoneHandler(event, todayTask.id)}
+              delete={() => deleteTaskHandler(index)}
+              rankChange={(event) => rankChangedHandler(event, todayTask.id)}
+              change={(event) => nameChangedHandler(event, todayTask.id)}
+            />
+          );
+        }
       })}
-
       <div>
         <button onClick={addTaskHandler}>addTask</button>
       </div>
+      {taskState.todayTasks.map((todayTask, index) => {
+        if (todayTask.isDone) {
+          return (
+            <Task
+              key={todayTask.id}
+              name={todayTask.name}
+              isDone={todayTask.isDone}
+              endTime={todayTask.endTime}
+              rank={todayTask.rank}
+              taskMinites={todayTask.taskMinites}
+              taskMinitesChange={(event) =>
+                taskMinitesChangedHandler(event, todayTask.id)
+              }
+              done={(event) => toggleDoneHandler(event, todayTask.id)}
+              delete={() => deleteTaskHandler(index)}
+              rankChange={(event) => rankChangedHandler(event, todayTask.id)}
+              change={(event) => nameChangedHandler(event, todayTask.id)}
+            />
+          );
+        }
+      })}
     </div>
   );
 };
