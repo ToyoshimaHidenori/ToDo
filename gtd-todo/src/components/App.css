@@ -13,7 +13,17 @@ svg {
   fill: currentColor;
 }
 
+@keyframes show {
+  0% {
+    box-shadow: 0px 0px 30px #bab9c2, 0px 0px 30px #ffffff;
+  }
+  100% {
+    box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff;
+  }
+}
+
 .App button {
+  animation: show 1s;
   border-radius: 12px;
   /* background: #e0dfea;
 	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */

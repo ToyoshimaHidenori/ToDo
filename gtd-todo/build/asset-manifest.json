@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ToDo/gtd-todo/build/static/css/main.98038c5f.chunk.css",
-    "main.js": "/ToDo/gtd-todo/build/static/js/main.64d97888.chunk.js",
-    "main.js.map": "/ToDo/gtd-todo/build/static/js/main.64d97888.chunk.js.map",
+    "main.css": "/ToDo/gtd-todo/build/static/css/main.3f15ad0f.chunk.css",
+    "main.js": "/ToDo/gtd-todo/build/static/js/main.0e5928fc.chunk.js",
+    "main.js.map": "/ToDo/gtd-todo/build/static/js/main.0e5928fc.chunk.js.map",
     "runtime-main.js": "/ToDo/gtd-todo/build/static/js/runtime-main.d85d108c.js",
     "runtime-main.js.map": "/ToDo/gtd-todo/build/static/js/runtime-main.d85d108c.js.map",
     "static/js/2.f3c5f18c.chunk.js": "/ToDo/gtd-todo/build/static/js/2.f3c5f18c.chunk.js",
     "static/js/2.f3c5f18c.chunk.js.map": "/ToDo/gtd-todo/build/static/js/2.f3c5f18c.chunk.js.map",
     "index.html": "/ToDo/gtd-todo/build/index.html",
-    "precache-manifest.27b1358ef40acd1db4bde8d2a81d7b33.js": "/ToDo/gtd-todo/build/precache-manifest.27b1358ef40acd1db4bde8d2a81d7b33.js",
+    "precache-manifest.866f50a2d2c401a6cd8ee3ddf06c8c7e.js": "/ToDo/gtd-todo/build/precache-manifest.866f50a2d2c401a6cd8ee3ddf06c8c7e.js",
     "service-worker.js": "/ToDo/gtd-todo/build/service-worker.js",
-    "static/css/main.98038c5f.chunk.css.map": "/ToDo/gtd-todo/build/static/css/main.98038c5f.chunk.css.map",
+    "static/css/main.3f15ad0f.chunk.css.map": "/ToDo/gtd-todo/build/static/css/main.3f15ad0f.chunk.css.map",
     "static/js/2.f3c5f18c.chunk.js.LICENSE.txt": "/ToDo/gtd-todo/build/static/js/2.f3c5f18c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d85d108c.js",
     "static/js/2.f3c5f18c.chunk.js",
-    "static/css/main.98038c5f.chunk.css",
-    "static/js/main.64d97888.chunk.js"
+    "static/css/main.3f15ad0f.chunk.css",
+    "static/js/main.0e5928fc.chunk.js"
   ]
 }

@@ -13,16 +13,14 @@ const Task = (props) => {
       {props.isDone ? (
         <button
           className="checkedButton"
-          style={{ color: "#3272fc" }}
+          style={{
+            color: "#3272fc",
+            boxShadow:
+              "15px 15px 30px #bab9c2, -15px -15px 30px #ffffff, inset 2px 2px 5px #bab9c2, inset -2px -2px 5px #ffffff",
+          }}
           onClick={props.done}
         >
-          <svg
-            width="24"
-            height="24"
-            xmlns="http://www.w3.org/2000/svg"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-          >
+          <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M21 6.285l-11.16 12.733-6.84-6.018 1.319-1.49 5.341 4.686 9.865-11.196 1.475 1.285z" />
           </svg>
         </button>
