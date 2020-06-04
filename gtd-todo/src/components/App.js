@@ -253,7 +253,7 @@ const App = (props) => {
                   fontSize: "5vw",
                   color: "#9f9ea7",
                   display: "flex",
-                  marginLeft: "50%",
+                  marginLeft: "40%",
                 }}
               >
                 /
