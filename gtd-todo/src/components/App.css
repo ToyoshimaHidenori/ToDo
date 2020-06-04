@@ -82,10 +82,20 @@ progress {
   progress {
     width: 68%;
   }
+  div.ProgressOuter {
+    width: 30%;
+    margin: 30px 34% 10px 34%;
+    display: none;
+  }
 }
 @media screen and (min-width: 1024px) {
   progress {
     width: 68%;
+  }
+  div.ProgressOuter {
+    width: 30%;
+    margin: 30px 34% 10px 34%;
+    display: none;
   }
 }
 progress::-moz-progress-bar {
@@ -110,4 +120,52 @@ progress::-webkit-progress-value {
   background: #507cda;
   box-shadow: inset 3px 3px 3px #96b8ec, inset -3px -3px 3px #6569c2;
   transition-duration: 1.2s;
+}
+
+#container {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.CircularProgressbar + div {
+  border-radius: 50%;
+  box-shadow: inset 3px 3px 6px #5061be, inset -3px -3px 6px #e6e5ff;
+}
+
+div.ProgressInner {
+  border: 2vw solid #e0dfea;
+  height: 63%;
+  width: 63%;
+  border-radius: 50%;
+  box-shadow: 3px 3px 6px #6b77c0, -3px -3px 6px #bdcee9,
+    inset 3px 3px 6px #ffffff, inset -3px -3px 6px #9f9ea6;
+}
+
+div.ProgressInnerInner {
+  padding: 10%;
+  padding-top: 20%;
+
+  width: 100%;
+}
+
+@keyframes showpo {
+  0% {
+    box-shadow: 0px 0px 30px #bab9c2, 0px 0px 30px #ffffff;
+  }
+  100% {
+    box-shadow: 15px 15px 15px #afaeb7, -15px -15px 15px #ffffff;
+  }
+}
+
+div.ProgressOuter {
+  animation: showpo 2s;
+  width: 60%;
+  margin: 30px 18% 10px 18%;
+  border-radius: 50%;
+  border: 5px solid #e0dfea;
+  background: #e0dfea;
+  box-shadow: 15px 15px 15px #afaeb7, -15px -15px 15px #ffffff,
+    inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
 }

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import "./App.css";
 import Task from "./Task";
+import {
+  CircularProgressbar,
+  buildStyles,
+  CircularProgressbarWithChildren,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import GradientSVG from "./GradientSVG";
 
 // Hook
 function useLocalStorage(key, initialValue) {
@@ -198,9 +205,71 @@ const App = (props) => {
     setProgressState([doneTaskMin, allTaskMin]);
   };
 
+  // progressbar.js@1.0.0 version is used
+  // Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
+
   return (
     <div className="App">
-      <h1>This is GTD todo</h1>
+      <div className="ProgressOuter">
+        <CircularProgressbarWithChildren
+          value={(100 * Number(progressState[0])) / Number(progressState[1])}
+          strokeWidth={15}
+          styles={buildStyles({
+            // Rotation of path and trail, in number of turns (0-1)
+            rotation: 0.5,
+
+            // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+            strokeLinecap: "round",
+
+            // How long animation takes to go from one percentage to another, in seconds
+            pathTransitionDuration: 1,
+
+            // Can specify path transition in more detail, or remove it entirely
+            // pathTransition: 'none',
+            // Colors
+            pathColor: "#507cda",
+            textColor: "#507cda",
+            trailColor: "#c6c6e6",
+            backgroundColor: "#3e98c7",
+          })}
+        >
+          <div
+            className="ProgressInner"
+            style={{ display: "flex", alignItems: "flex-center" }}
+          >
+            <div className="ProgressInnerInner">
+              <div
+                style={{
+                  fontSize: "16vw",
+                  textAlign: "center",
+                  color: "#507cda",
+                  textShadow: "0px 0px 7px #1c64ff",
+                }}
+              >
+                {progressState[0]}
+              </div>
+              <div
+                style={{
+                  fontSize: "5vw",
+                  color: "#9f9ea7",
+                  display: "flex",
+                  marginLeft: "50%",
+                }}
+              >
+                /
+                <div
+                  style={{
+                    fontSize: "5vw",
+                    color: "#507cda",
+                  }}
+                >
+                  {progressState[1]}
+                </div>
+              </div>
+            </div>
+          </div>
+        </CircularProgressbarWithChildren>
+      </div>
       <button onClick={resetTaskHandler}> reset </button>
       <button onClick={calcProgress}> sync </button>
       <p>
