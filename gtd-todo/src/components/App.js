@@ -210,72 +210,74 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <div className="ProgressOuter">
-        <CircularProgressbarWithChildren
-          value={(100 * Number(progressState[0])) / Number(progressState[1])}
-          strokeWidth={15}
-          styles={buildStyles({
-            // Rotation of path and trail, in number of turns (0-1)
-            rotation: 0.5,
+      <div className="header">
+        <div className="ProgressOuter">
+          <CircularProgressbarWithChildren
+            value={(100 * Number(progressState[0])) / Number(progressState[1])}
+            strokeWidth={15}
+            styles={buildStyles({
+              // Rotation of path and trail, in number of turns (0-1)
+              rotation: 0.5,
 
-            // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-            strokeLinecap: "round",
+              // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+              strokeLinecap: "round",
 
-            // How long animation takes to go from one percentage to another, in seconds
-            pathTransitionDuration: 1,
+              // How long animation takes to go from one percentage to another, in seconds
+              pathTransitionDuration: 1,
 
-            // Can specify path transition in more detail, or remove it entirely
-            // pathTransition: 'none',
-            // Colors
-            pathColor: "#507cda",
-            textColor: "#507cda",
-            trailColor: "#c6c6e6",
-            backgroundColor: "#3e98c7",
-          })}
-        >
-          <div
-            className="ProgressInner"
-            style={{ display: "flex", alignItems: "flex-center" }}
+              // Can specify path transition in more detail, or remove it entirely
+              // pathTransition: 'none',
+              // Colors
+              pathColor: "#507cda",
+              textColor: "#507cda",
+              trailColor: "#c6c6e6",
+              backgroundColor: "#3e98c7",
+            })}
           >
-            <div className="ProgressInnerInner">
-              <div
-                style={{
-                  fontSize: "16vw",
-                  textAlign: "center",
-                  color: "#507cda",
-                  textShadow: "0px 0px 7px #1c64ff",
-                }}
-              >
-                {progressState[0]}
-              </div>
-              <div
-                style={{
-                  fontSize: "5vw",
-                  color: "#9f9ea7",
-                  display: "flex",
-                  marginLeft: "40%",
-                }}
-              >
-                /
+            <div
+              className="ProgressInner"
+              style={{ display: "flex", alignItems: "flex-center" }}
+            >
+              <div className="ProgressInnerInner">
+                <div
+                  style={{
+                    fontSize: "16vw",
+                    textAlign: "center",
+                    color: "#507cda",
+                    textShadow: "0px 0px 7px #1c64ff",
+                  }}
+                >
+                  {progressState[0]}
+                </div>
                 <div
                   style={{
                     fontSize: "5vw",
-                    color: "#507cda",
+                    color: "#9f9ea7",
+                    display: "flex",
+                    marginLeft: "40%",
                   }}
                 >
-                  {progressState[1]}
+                  /
+                  <div
+                    style={{
+                      fontSize: "5vw",
+                      color: "#507cda",
+                    }}
+                  >
+                    {progressState[1]}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </CircularProgressbarWithChildren>
-      </div>
-      <button onClick={resetTaskHandler}> reset </button>
-      <button onClick={calcProgress}> sync </button>
-      <p>
+          </CircularProgressbarWithChildren>
+        </div>
+        <button onClick={resetTaskHandler}> reset </button>
+        <button onClick={calcProgress}> sync </button>
+        {/* <p>
         Total:{progressState[1]}min Done:{progressState[0]}min Undone:
         {progressState[1] - progressState[0]}
-      </p>
+      </p> */}
+      </div>
       <progress
         id="progressbar"
         max={progressState[1]}
@@ -326,6 +328,7 @@ const App = (props) => {
           );
         }
       })}
+      <small>©︎Toyoshima Hidenori 2020, v0.0.1</small>
     </div>
   );
 };
