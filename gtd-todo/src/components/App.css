@@ -2,6 +2,7 @@ body {
   margin: 0;
   background: #e0dfea;
   color: #6595d8;
+  font-family: "Varela Round", sans-serif;
 }
 
 .App {
@@ -144,9 +145,9 @@ div.ProgressInner {
 }
 
 div.ProgressInnerInner {
-  padding: 10%;
-  padding-top: 20%;
-
+  padding: 20%;
+  padding-bottom: 0%;
+  margin-bottom: 0px;
   width: 100%;
 }
 
