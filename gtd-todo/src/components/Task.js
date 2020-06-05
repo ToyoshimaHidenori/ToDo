@@ -12,7 +12,7 @@ const Task = (props) => {
         </button>
         <input
           type="text"
-          placeholder="new task"
+          placeholder="New task"
           onChange={props.change}
           value={props.name}
         />
