@@ -7,6 +7,7 @@ body {
 
 .header {
   font-family: "Varela Round", sans-serif;
+  font-weight: 100;
   margin-bottom: 40px;
 }
 
@@ -49,7 +50,6 @@ a.twitter-share-button,
   background: #e0dfea;
   box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff;
   font-size: 1.4em;
-  font-weight: bold;
   color: #6595d8;
   margin: 15px;
   padding: 7px 20px 7px 20px;

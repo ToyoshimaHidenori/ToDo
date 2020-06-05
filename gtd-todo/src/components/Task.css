@@ -90,8 +90,9 @@
 }
 
 .Task .Unchecked {
+  font-family: "Noto Sans JP", sans-serif;
   animation: showt 1s;
-  border-radius: 36px;
+  border-radius: 24px;
   background: #e0dfea;
   box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff;
   padding: 10px;
@@ -102,8 +103,9 @@
 }
 
 .Task .Checked {
+  font-family: "Noto Sans JP", sans-serif;
   animation: showt 1s;
-  border-radius: 36px;
+  border-radius: 24px;
   background: #e0dfea;
   box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff,
     inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
@@ -144,12 +146,12 @@
 }
 
 .Task input {
+  font-family: "Noto Sans JP", sans-serif;
   animation: showd 2s;
   border-radius: 11px;
   background: #e0dfea;
   box-shadow: inset 3px 3px 6px #9f9ea6, inset -3px -3px 6px #ffffff;
   font-size: 1.8em;
-  font-weight: bold;
   color: #6595d8;
   margin: 10px;
   padding: 5px 7px 3px 7px;
