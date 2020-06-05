@@ -188,9 +188,11 @@ input::placeholder {
 
 .Task input:focus {
   color: #026efa;
+  text-shadow: 0px 0px 5px #6595d8;
 }
 .Task input:hover {
   color: #026efa;
+  text-shadow: 0px 0px 5px #6595d8;
 }
 
 .Task select {

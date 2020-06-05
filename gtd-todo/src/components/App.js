@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import "./App.css";
 import Task from "./Task";
 import {
-  CircularProgressbar,
   buildStyles,
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import GradientSVG from "./GradientSVG";
 
 // Hook
 function useLocalStorage(key, initialValue) {
@@ -143,7 +141,22 @@ const App = (props) => {
     const todayTasks = [...taskState.todayTasks];
     todayTasks[todayTaskIndex] = todayTask;
     setTaskState({ todayTasks: todayTasks });
-    calcProgress(setTimeout(1000));
+
+    let allTaskMin = 0;
+    let doneTaskMin = 0;
+    taskState.todayTasks.forEach((todayTask, index, array) => {
+      allTaskMin += Number(todayTask.taskMinites);
+      if (todayTask.isDone) {
+        doneTaskMin += Number(todayTask.taskMinites);
+      }
+    });
+
+    if (todayTask.isDone) {
+      doneTaskMin += Number(todayTask.taskMinites);
+    } else {
+      doneTaskMin -= Number(todayTask.taskMinites);
+    }
+    setProgressState([doneTaskMin, allTaskMin]);
   };
 
   const nameChangedHandler = (event, id) => {
@@ -166,11 +179,28 @@ const App = (props) => {
     const todayTask = {
       ...taskState.todayTasks[todayTaskIndex],
     };
+    const diff = Number(event.target.value) - Number(todayTask.taskMinites);
+    console.log(event.target.value);
+    console.log(todayTask.taskMinites);
     todayTask.taskMinites = event.target.value;
     const todayTasks = [...taskState.todayTasks];
     todayTasks[todayTaskIndex] = todayTask;
     setTaskState({ todayTasks: todayTasks });
-    calcProgress();
+
+    let allTaskMin = 0;
+    let doneTaskMin = 0;
+    taskState.todayTasks.forEach((todayTask, index, array) => {
+      allTaskMin += Number(todayTask.taskMinites);
+      if (todayTask.isDone) {
+        doneTaskMin += Number(todayTask.taskMinites);
+      }
+    });
+
+    allTaskMin += Number(diff);
+    if (todayTask.isDone) {
+      doneTaskMin += Number(diff);
+    }
+    setProgressState([doneTaskMin, allTaskMin]);
   };
 
   const rankChangedHandler = (event, id) => {
@@ -210,6 +240,7 @@ const App = (props) => {
 
   return (
     <div className="App">
+      <h1>Today's tasks</h1>
       <div className="header">
         <div className="ProgressOuter">
           <CircularProgressbarWithChildren
@@ -220,7 +251,8 @@ const App = (props) => {
               rotation: 0.5,
 
               // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-              strokeLinecap: "round",
+              strokeLinecap: "butt",
+              //   "round",
 
               // How long animation takes to go from one percentage to another, in seconds
               pathTransitionDuration: 1,
@@ -229,7 +261,7 @@ const App = (props) => {
               // pathTransition: 'none',
               // Colors
               pathColor: "#507cda",
-              textColor: "#507cda",
+              textColor: "#1c64ff",
               trailColor: "#c6c6e6",
               backgroundColor: "#3e98c7",
             })}
@@ -243,7 +275,7 @@ const App = (props) => {
                   style={{
                     fontSize: "16vw",
                     textAlign: "center",
-                    color: "#507cda",
+                    color: "#307cea",
                     textShadow: "0px 0px 7px #1c64ff",
                   }}
                 >
