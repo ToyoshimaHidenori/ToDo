@@ -357,7 +357,7 @@ const App = (props) => {
         }
       })}
       <div>
-        <button onClick={addTaskHandler}>addTask</button>
+        <button onClick={addTaskHandler}>Add task</button>
       </div>
       {taskState.todayTasks.map((todayTask, index) => {
         if (todayTask.isDone) {
