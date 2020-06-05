@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import "./App.css";
 import Task from "./Task";
 import {
@@ -6,6 +6,9 @@ import {
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import arrayMove from "array-move";
 
 // Hook
 function useLocalStorage(key, initialValue) {
@@ -45,28 +48,6 @@ function useLocalStorage(key, initialValue) {
 }
 
 const App = (props) => {
-  //   const [taskState, setTaskState] = useState({
-  //     todayTasks: [
-  //       {
-  //         id: "asdfas",
-  //         name: "Sample1",
-  //         isDone: false,
-  //         endTime: Date.parse(2020 / 10 / 21),
-  //         taskMinites: 30,
-  //         rank: "A",
-  //       },
-  //       {
-  //         id: "afffdjkdk",
-  //         name: "Sample2",
-  //         isDone: false,
-  //         endTime: Date(),
-  //         taskMinites: 30,
-  //         rank: "B",
-  //       },
-  //     ],
-  //   });
-
-  //   const [progressState, setProgressState] = useState([0, 60]);
   const [taskState, setTaskState] = useLocalStorage("taskState", {
     todayTasks: [
       {
@@ -93,6 +74,48 @@ const App = (props) => {
     30,
   ]);
 
+  const SortableItem = SortableElement(({ value }) => (
+    <li>
+      <Task
+        key={value.id}
+        name={value.name}
+        isDone={value.isDone}
+        endTime={value.endTime}
+        rank={value.rank}
+        taskMinites={value.taskMinites}
+        taskMinitesChange={(event) =>
+          taskMinitesChangedHandler(event, value.id)
+        }
+        done={(event) => toggleDoneHandler(event, value.id)}
+        delete={() => deleteTaskHandler(value.JSONindex)}
+        rankChange={(event) => rankChangedHandler(event, value.id)}
+        change={(event) => nameChangedHandler(event, value.id)}
+      />
+    </li>
+  ));
+
+  const SortableList = SortableContainer(({ items }) => {
+    return (
+      <ul>
+        {items.map((value, index) => (
+          <SortableItem key={`item-${value}`} index={index} value={value} />
+        ))}
+      </ul>
+    );
+  });
+
+  class SortableComponent extends Component {
+    onSortEnd = ({ oldIndex, newIndex }) => {
+      setTaskState(({ todayTasks }) => ({
+        todayTasks: arrayMove(todayTasks, oldIndex, newIndex),
+      }));
+    };
+    render() {
+      return (
+        <SortableList items={taskState.todayTasks} onSortEnd={this.onSortEnd} />
+      );
+    }
+  }
   const resetTaskHandler = () => {
     setTaskState({
       todayTasks: [
@@ -313,7 +336,6 @@ const App = (props) => {
         {/* <button onClick={resetTaskHandler}> reset </button>
         <button onClick={calcProgress}> sync </button> */}
       </div>
-
       <div style={tweetButton}>
         <a
           id="tweetButton"
@@ -330,13 +352,13 @@ const App = (props) => {
           Tweet
         </a>
       </div>
-
       <progress
         id="progressbar"
         max={progressState[1]}
         value={progressState[0]}
       ></progress>
-      {taskState.todayTasks.map((todayTask, index) => {
+      <SortableComponent />
+      {/* {taskState.todayTasks.map((todayTask, index) => {
         if (!todayTask.isDone) {
           return (
             <Task
@@ -356,11 +378,11 @@ const App = (props) => {
             />
           );
         }
-      })}
+      })} */}
       <div>
         <button onClick={addTaskHandler}>Add task</button>
       </div>
-      {taskState.todayTasks.map((todayTask, index) => {
+      {/* {taskState.todayTasks.map((todayTask, index) => {
         if (todayTask.isDone) {
           return (
             <Task
@@ -380,7 +402,7 @@ const App = (props) => {
             />
           );
         }
-      })}
+      })} */}
       <small>©︎Toyoshima Hidenori 2020, v0.0.1</small>
     </div>
   );

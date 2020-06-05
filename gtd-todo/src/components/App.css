@@ -4,6 +4,10 @@ body {
   color: #6595d8;
   z-index: 0;
 }
+ul {
+  list-style: none;
+  padding-left: 0;
+}
 
 .header {
   font-family: "Varela Round", sans-serif;
