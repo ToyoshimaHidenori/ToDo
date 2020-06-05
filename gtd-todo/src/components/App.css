@@ -2,10 +2,12 @@ body {
   margin: 0;
   background: #e0dfea;
   color: #6595d8;
+  z-index: 0;
 }
 
 .header {
   font-family: "Varela Round", sans-serif;
+  margin-bottom: 40px;
 }
 
 .App h1 {
@@ -38,6 +40,7 @@ svg {
   }
 }
 
+a.twitter-share-button,
 .App button {
   animation: show 1s;
   border-radius: 12px;
@@ -56,6 +59,7 @@ svg {
   transition-duration: 0.7s;
 }
 
+a.twitter-share-button,
 .App button:hover {
   /* background: linear-gradient(145deg, #f0effa, #cac9d3);
 	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
@@ -93,6 +97,13 @@ progress {
   border-radius: 10px;
   transition-duration: 1.2s;
   width: 95%;
+}
+
+@media screen and (max-width: 768px) {
+  progress {
+    display: none;
+    width: 68%;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
@@ -176,10 +187,22 @@ div.ProgressInnerInner {
   }
 }
 
+@keyframes donepo {
+  0% {
+    box-shadow: 15px 15px 15px #8f94b3, -15px -15px 15px #ffffff;
+  }
+  30% {
+    box-shadow: 5px 5px 30px #8288a5, -5px -5px 30px #ffffff;
+  }
+  100% {
+    box-shadow: 15px 15px 15px #8f94b3, -15px -15px 15px #ffffff;
+  }
+}
+
 div.ProgressOuter {
   animation: showpo 2s;
   width: 60%;
-  margin: 30px 18% 10px 18%;
+  margin: 10px 18% 10px 18%;
   border-radius: 50%;
   border: 5px solid #e0dfea;
   background: #e0dfea;

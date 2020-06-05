@@ -235,31 +235,37 @@ const App = (props) => {
     setProgressState([doneTaskMin, allTaskMin]);
   };
 
-  // progressbar.js@1.0.0 version is used
-  // Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
+  let tweetButton;
+  let donepo;
+  if (progressState[1] === progressState[0] && progressState[0] !== 0) {
+    tweetButton = {
+      marginTop: "35px",
+      transitionDuration: "1s",
+    };
+    donepo = {
+      animation: "donepo 2s infinite",
+    };
+  } else {
+    tweetButton = {
+      transitionDuration: "1s",
+      position: "absolute",
+      left: "-100px",
+      top: "-100px",
+    };
+  }
 
   return (
     <div className="App">
       <h1>Today's tasks</h1>
       <div className="header">
-        <div className="ProgressOuter">
+        <div className="ProgressOuter" style={donepo}>
           <CircularProgressbarWithChildren
             value={(100 * Number(progressState[0])) / Number(progressState[1])}
             strokeWidth={15}
             styles={buildStyles({
-              // Rotation of path and trail, in number of turns (0-1)
               rotation: 0.5,
-
-              // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
               strokeLinecap: "butt",
-              //   "round",
-
-              // How long animation takes to go from one percentage to another, in seconds
               pathTransitionDuration: 1,
-
-              // Can specify path transition in more detail, or remove it entirely
-              // pathTransition: 'none',
-              // Colors
               pathColor: "#507cda",
               textColor: "#1c64ff",
               trailColor: "#c6c6e6",
@@ -303,13 +309,27 @@ const App = (props) => {
             </div>
           </CircularProgressbarWithChildren>
         </div>
-        <button onClick={resetTaskHandler}> reset </button>
-        <button onClick={calcProgress}> sync </button>
-        {/* <p>
-        Total:{progressState[1]}min Done:{progressState[0]}min Undone:
-        {progressState[1] - progressState[0]}
-      </p> */}
+        {/* <button onClick={resetTaskHandler}> reset </button>
+        <button onClick={calcProgress}> sync </button> */}
       </div>
+
+      <div style={tweetButton}>
+        <a
+          id="tweetButton"
+          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+          className="twitter-share-button"
+          data-size="large"
+          data-text={
+            "Completed all today's tasks! Total:" + progressState[0] + "min"
+          }
+          data-url="https://toyoshimahidenori.github.io/ToDo/gtd-todo/build/index.html"
+          data-hashtags="todo"
+          data-show-count="false"
+        >
+          Tweet
+        </a>
+      </div>
+
       <progress
         id="progressbar"
         max={progressState[1]}
