@@ -2,12 +2,27 @@ body {
   margin: 0;
   background: #e0dfea;
   color: #6595d8;
+}
+
+.header {
   font-family: "Varela Round", sans-serif;
+}
+
+.App h1 {
+  text-align: left;
+  font-size: x-large;
+  font-weight: bolder;
+  margin: 10px;
+  margin-left: 20px;
+  font-family: "Average Sans", sans-serif;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
 }
 
 .App {
   text-align: center;
   background: #e0dfea;
+  font-family: "Average Sans", sans-serif;
 }
 
 svg {
@@ -47,6 +62,7 @@ svg {
   background: linear-gradient(145deg, #cac9d3, #f0effa);
   box-shadow: 5px 5px 10px #cccbd5, -5px -5px 10px #f4f3ff;
   color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
 }
 
 .App button:active {
