@@ -71,26 +71,26 @@ const App = (props) => {
     todayTasks: [
       {
         id: "asdfas",
-        name: "Sample1",
-        isDone: false,
+        name: "アプリにアクセスする",
+        isDone: true,
         endTime: Date.parse(2020 / 10 / 21),
-        taskMinites: 30,
+        taskMinites: 10,
         rank: "A",
       },
       {
         id: "afffdjkdk",
-        name: "Sample2",
+        name: "Task を登録する",
         isDone: false,
         endTime: Date(),
-        taskMinites: 30,
-        rank: "B",
+        taskMinites: 20,
+        rank: "A",
       },
     ],
   });
 
   const [progressState, setProgressState] = useLocalStorage("progressState", [
-    0,
-    60,
+    10,
+    30,
   ]);
 
   const resetTaskHandler = () => {
@@ -116,6 +116,7 @@ const App = (props) => {
     });
     setProgressState([0, 60]);
   };
+
   const addTaskHandler = () => {
     const todayTasks = taskState.todayTasks;
     todayTasks.push({
@@ -124,7 +125,7 @@ const App = (props) => {
       isDone: false,
       endTime: Date(),
       taskMinites: 30,
-      rank: "B",
+      rank: "A",
     });
     setTaskState({ todayTasks });
     calcProgress();
