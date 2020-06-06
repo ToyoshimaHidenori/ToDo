@@ -345,7 +345,12 @@ const App = (props) => {
         })}
       </TransitionGroup>
       <div>
-        <button onClick={addTaskHandler}>Add task</button>
+        <button
+          onClick={addTaskHandler}
+          onTouchStart="gtag('event', 'touch', {'event_category': 'button','event_label': 'addtask'});"
+        >
+          Add task
+        </button>
       </div>
       <TransitionGroup>
         {taskState.todayTasks.map((todayTask, index) => {
