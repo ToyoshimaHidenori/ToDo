@@ -24,11 +24,13 @@ body {
 
 .hi-enter {
   opacity: 0;
+  max-height: 0px;
 }
 
 .hi-enter-active {
   opacity: 1;
-  transition: 0.5s;
+  max-height: 120px;
+  transition: 0.3s;
 }
 
 .hi-enter-done {
@@ -36,16 +38,19 @@ body {
 }
 
 .hi-exit {
+  max-height: 120px;
   opacity: 1;
 }
 
 .hi-exit-active {
   opacity: 0;
-  transition: 0.5s;
+  transition: 0.3s;
+  max-height: 0px;
 }
 
 .hi-exit-done {
   opacity: 0;
+  max-height: 0px;
 }
 
 .App {
