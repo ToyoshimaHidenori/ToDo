@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/ToDo/gtd-todo/build/static/css/main.491018e5.chunk.css",
-    "main.js": "/ToDo/gtd-todo/build/static/js/main.f2fe8d77.chunk.js",
-    "main.js.map": "/ToDo/gtd-todo/build/static/js/main.f2fe8d77.chunk.js.map",
+    "main.css": "/ToDo/gtd-todo/build/static/css/main.6aafadbe.chunk.css",
+    "main.js": "/ToDo/gtd-todo/build/static/js/main.6cc5d796.chunk.js",
+    "main.js.map": "/ToDo/gtd-todo/build/static/js/main.6cc5d796.chunk.js.map",
     "runtime-main.js": "/ToDo/gtd-todo/build/static/js/runtime-main.d85d108c.js",
     "runtime-main.js.map": "/ToDo/gtd-todo/build/static/js/runtime-main.d85d108c.js.map",
     "static/css/2.f524894f.chunk.css": "/ToDo/gtd-todo/build/static/css/2.f524894f.chunk.css",
-    "static/js/2.ddfb9b2e.chunk.js": "/ToDo/gtd-todo/build/static/js/2.ddfb9b2e.chunk.js",
-    "static/js/2.ddfb9b2e.chunk.js.map": "/ToDo/gtd-todo/build/static/js/2.ddfb9b2e.chunk.js.map",
+    "static/js/2.448d2351.chunk.js": "/ToDo/gtd-todo/build/static/js/2.448d2351.chunk.js",
+    "static/js/2.448d2351.chunk.js.map": "/ToDo/gtd-todo/build/static/js/2.448d2351.chunk.js.map",
     "index.html": "/ToDo/gtd-todo/build/index.html",
-    "precache-manifest.57f598cd9f8fea3bfbe45c340bad2a83.js": "/ToDo/gtd-todo/build/precache-manifest.57f598cd9f8fea3bfbe45c340bad2a83.js",
+    "precache-manifest.2d05a39e130c794e8e3af0a83ead13f4.js": "/ToDo/gtd-todo/build/precache-manifest.2d05a39e130c794e8e3af0a83ead13f4.js",
     "service-worker.js": "/ToDo/gtd-todo/build/service-worker.js",
     "static/css/2.f524894f.chunk.css.map": "/ToDo/gtd-todo/build/static/css/2.f524894f.chunk.css.map",
-    "static/css/main.491018e5.chunk.css.map": "/ToDo/gtd-todo/build/static/css/main.491018e5.chunk.css.map",
-    "static/js/2.ddfb9b2e.chunk.js.LICENSE.txt": "/ToDo/gtd-todo/build/static/js/2.ddfb9b2e.chunk.js.LICENSE.txt"
+    "static/css/main.6aafadbe.chunk.css.map": "/ToDo/gtd-todo/build/static/css/main.6aafadbe.chunk.css.map",
+    "static/js/2.448d2351.chunk.js.LICENSE.txt": "/ToDo/gtd-todo/build/static/js/2.448d2351.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d85d108c.js",
     "static/css/2.f524894f.chunk.css",
-    "static/js/2.ddfb9b2e.chunk.js",
-    "static/css/main.491018e5.chunk.css",
-    "static/js/main.f2fe8d77.chunk.js"
+    "static/js/2.448d2351.chunk.js",
+    "static/css/main.6aafadbe.chunk.css",
+    "static/js/main.6cc5d796.chunk.js"
   ]
 }
