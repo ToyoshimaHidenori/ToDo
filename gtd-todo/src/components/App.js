@@ -45,28 +45,6 @@ function useLocalStorage(key, initialValue) {
 }
 
 const App = (props) => {
-  //   const [taskState, setTaskState] = useState({
-  //     todayTasks: [
-  //       {
-  //         id: "asdfas",
-  //         name: "Sample1",
-  //         isDone: false,
-  //         endTime: Date.parse(2020 / 10 / 21),
-  //         taskMinites: 30,
-  //         rank: "A",
-  //       },
-  //       {
-  //         id: "afffdjkdk",
-  //         name: "Sample2",
-  //         isDone: false,
-  //         endTime: Date(),
-  //         taskMinites: 30,
-  //         rank: "B",
-  //       },
-  //     ],
-  //   });
-
-  //   const [progressState, setProgressState] = useState([0, 60]);
   const [taskState, setTaskState] = useLocalStorage("taskState", {
     todayTasks: [
       {
@@ -92,6 +70,8 @@ const App = (props) => {
     10,
     30,
   ]);
+
+  let tweetMin = progressState[0];
 
   const resetTaskHandler = () => {
     setTaskState({
@@ -239,16 +219,15 @@ const App = (props) => {
   let tweetButton;
   let donepo;
   if (progressState[1] === progressState[0] && progressState[0] !== 0) {
+    tweetMin = progressState[0];
     tweetButton = {
       marginTop: "35px",
-      transitionDuration: "1s",
     };
     donepo = {
       animation: "donepo 2s infinite",
     };
   } else {
     tweetButton = {
-      transitionDuration: "1s",
       position: "absolute",
       left: "-100px",
       top: "-100px",
@@ -286,7 +265,7 @@ const App = (props) => {
                     textShadow: "0px 0px 7px #1c64ff",
                   }}
                 >
-                  {progressState[0]}
+                  {(tweetMin = progressState[0])}
                 </div>
                 <div
                   style={{
@@ -320,11 +299,9 @@ const App = (props) => {
           href="https://twitter.com/share?ref_src=twsrc%5Etfw"
           className="twitter-share-button"
           data-size="large"
-          data-text={
-            "Completed all today's tasks! Total:" + progressState[0] + "min"
-          }
+          data-text={"✨✨Completed all today's tasks✨✨"}
           data-url="https://toyoshimahidenori.github.io/ToDo/gtd-todo/build/index.html"
-          data-hashtags="todo"
+          data-hashtags="NeuToDo"
           data-show-count="false"
         >
           Tweet
