@@ -358,7 +358,7 @@ const App = (props) => {
           );
         }
       })}
-      <small>©︎Toyoshima Hidenori 2020, v0.0.1</small>
+      <small>©︎Toyoshima Hidenori 2020, v1.0.0</small>
     </div>
   );
 };
