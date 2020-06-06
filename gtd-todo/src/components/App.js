@@ -7,6 +7,9 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
+import TransitionGroup from "react-transition-group/TransitionGroup";
+import CSSTransition from "react-transition-group/CSSTransition";
+
 // Hook
 function useLocalStorage(key, initialValue) {
   // State to store our value
@@ -313,51 +316,64 @@ const App = (props) => {
         max={progressState[1]}
         value={progressState[0]}
       ></progress>
-      {taskState.todayTasks.map((todayTask, index) => {
-        if (!todayTask.isDone) {
-          return (
-            <Task
-              key={todayTask.id}
-              name={todayTask.name}
-              isDone={todayTask.isDone}
-              endTime={todayTask.endTime}
-              rank={todayTask.rank}
-              taskMinites={todayTask.taskMinites}
-              taskMinitesChange={(event) =>
-                taskMinitesChangedHandler(event, todayTask.id)
-              }
-              done={(event) => toggleDoneHandler(event, todayTask.id)}
-              delete={() => deleteTaskHandler(index)}
-              rankChange={(event) => rankChangedHandler(event, todayTask.id)}
-              change={(event) => nameChangedHandler(event, todayTask.id)}
-            />
-          );
-        }
-      })}
+
+      <TransitionGroup>
+        {taskState.todayTasks.map((todayTask, index) => {
+          if (!todayTask.isDone) {
+            return (
+              <CSSTransition key={todayTask.id} timeout={1000} classNames="hi">
+                <Task
+                  key={todayTask.id}
+                  name={todayTask.name}
+                  isDone={todayTask.isDone}
+                  endTime={todayTask.endTime}
+                  rank={todayTask.rank}
+                  taskMinites={todayTask.taskMinites}
+                  taskMinitesChange={(event) =>
+                    taskMinitesChangedHandler(event, todayTask.id)
+                  }
+                  done={(event) => toggleDoneHandler(event, todayTask.id)}
+                  delete={() => deleteTaskHandler(index)}
+                  rankChange={(event) =>
+                    rankChangedHandler(event, todayTask.id)
+                  }
+                  change={(event) => nameChangedHandler(event, todayTask.id)}
+                />
+              </CSSTransition>
+            );
+          }
+        })}
+      </TransitionGroup>
       <div>
         <button onClick={addTaskHandler}>Add task</button>
       </div>
-      {taskState.todayTasks.map((todayTask, index) => {
-        if (todayTask.isDone) {
-          return (
-            <Task
-              key={todayTask.id}
-              name={todayTask.name}
-              isDone={todayTask.isDone}
-              endTime={todayTask.endTime}
-              rank={todayTask.rank}
-              taskMinites={todayTask.taskMinites}
-              taskMinitesChange={(event) =>
-                taskMinitesChangedHandler(event, todayTask.id)
-              }
-              done={(event) => toggleDoneHandler(event, todayTask.id)}
-              delete={() => deleteTaskHandler(index)}
-              rankChange={(event) => rankChangedHandler(event, todayTask.id)}
-              change={(event) => nameChangedHandler(event, todayTask.id)}
-            />
-          );
-        }
-      })}
+      <TransitionGroup>
+        {taskState.todayTasks.map((todayTask, index) => {
+          if (todayTask.isDone) {
+            return (
+              <CSSTransition key={todayTask.id} timeout={1000} classNames="hi">
+                <Task
+                  key={todayTask.id}
+                  name={todayTask.name}
+                  isDone={todayTask.isDone}
+                  endTime={todayTask.endTime}
+                  rank={todayTask.rank}
+                  taskMinites={todayTask.taskMinites}
+                  taskMinitesChange={(event) =>
+                    taskMinitesChangedHandler(event, todayTask.id)
+                  }
+                  done={(event) => toggleDoneHandler(event, todayTask.id)}
+                  delete={() => deleteTaskHandler(index)}
+                  rankChange={(event) =>
+                    rankChangedHandler(event, todayTask.id)
+                  }
+                  change={(event) => nameChangedHandler(event, todayTask.id)}
+                />
+              </CSSTransition>
+            );
+          }
+        })}
+      </TransitionGroup>
       <small>©︎Toyoshima Hidenori 2020, v1.0.0</small>
     </div>
   );
