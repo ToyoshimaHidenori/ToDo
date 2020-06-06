@@ -7,8 +7,14 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import {
+  sortableContainer,
+  SortableElement,
+  sortableHandle,
+} from "react-sortable-hoc";
 import arrayMove from "array-move";
+
+const DragHandle = sortableHandle(() => <span>::</span>);
 
 // Hook
 function useLocalStorage(key, initialValue) {
@@ -74,48 +80,50 @@ const App = (props) => {
     30,
   ]);
 
-  const SortableItem = SortableElement(({ value }) => (
-    <li>
-      <Task
-        key={value.id}
-        name={value.name}
-        isDone={value.isDone}
-        endTime={value.endTime}
-        rank={value.rank}
-        taskMinites={value.taskMinites}
-        taskMinitesChange={(event) =>
-          taskMinitesChangedHandler(event, value.id)
-        }
-        done={(event) => toggleDoneHandler(event, value.id)}
-        delete={() => deleteTaskHandler(value.JSONindex)}
-        rankChange={(event) => rankChangedHandler(event, value.id)}
-        change={(event) => nameChangedHandler(event, value.id)}
-      />
-    </li>
-  ));
+  const SortableItem = React.memo(
+    SortableElement(({ value }) => (
+      <li>
+        <Task
+          key={value.id}
+          name={value.name}
+          isDone={value.isDone}
+          endTime={value.endTime}
+          rank={value.rank}
+          taskMinites={value.taskMinites}
+          taskMinitesChange={(event) =>
+            taskMinitesChangedHandler(event, value.id)
+          }
+          done={(event) => toggleDoneHandler(event, value.id)}
+          delete={() => deleteTaskHandler(value.JSONindex)}
+          rankChange={(event) => rankChangedHandler(event, value.id)}
+          change={(event) => nameChangedHandler(event, value.id)}
+        />
+      </li>
+    ))
+  );
 
-  const SortableList = SortableContainer(({ items }) => {
-    return (
-      <ul>
-        {items.map((value, index) => (
-          <SortableItem key={`item-${value}`} index={index} value={value} />
-        ))}
-      </ul>
-    );
-  });
+  const SortableContainer = React.memo(
+    sortableContainer(({ children }) => {
+      return <ul>{children}</ul>;
+    })
+  );
 
-  class SortableComponent extends Component {
-    onSortEnd = ({ oldIndex, newIndex }) => {
+  const SortableComponent = React.memo(() => {
+    const onSortEnd = ({ oldIndex, newIndex }) => {
       setTaskState(({ todayTasks }) => ({
         todayTasks: arrayMove(todayTasks, oldIndex, newIndex),
       }));
     };
-    render() {
-      return (
-        <SortableList items={taskState.todayTasks} onSortEnd={this.onSortEnd} />
-      );
-    }
-  }
+    return (
+      <SortableContainer onSortEnd={onSortEnd} lockAxis="y" pressDelay="300">
+        {taskState.todayTasks.map((value, index) => (
+          <SortableItem key={`item-${value.id}`} index={index} value={value} />
+        ))}
+      </SortableContainer>
+      // <SortableList items={taskState.todayTasks} onSortEnd={this.onSortEnd} />
+    );
+  });
+
   const resetTaskHandler = () => {
     setTaskState({
       todayTasks: [
