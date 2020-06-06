@@ -29,6 +29,11 @@ const Task = (props) => {
           />
           min
         </div>
+        {/* <input
+          type="date"
+          onChange={props.endTimeChange}
+          value={props.endTime}
+        /> */}
         <button className="Trash" onClick={props.delete}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

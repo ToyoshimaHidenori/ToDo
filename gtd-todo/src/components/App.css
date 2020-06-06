@@ -167,7 +167,7 @@ div.ProgressInner {
   height: 63%;
   width: 63%;
   border-radius: 50%;
-  box-shadow: 3px 3px 6px #6b77c0, -3px -3px 6px #bdcee9,
+  box-shadow: 3px 3px 8px #6b77c0, -3px -3px 8px #bdcee9,
     inset 3px 3px 6px #ffffff, inset -3px -3px 6px #9f9ea6;
 }
 
@@ -191,8 +191,8 @@ div.ProgressInnerInner {
   0% {
     box-shadow: 15px 15px 15px #8f94b3, -15px -15px 15px #ffffff;
   }
-  30% {
-    box-shadow: 5px 5px 30px #8288a5, -5px -5px 30px #ffffff;
+  50% {
+    box-shadow: 10px 10px 40px #3950c2, -10px -10px 40px #b7dcff;
   }
   100% {
     box-shadow: 15px 15px 15px #8f94b3, -15px -15px 15px #ffffff;
