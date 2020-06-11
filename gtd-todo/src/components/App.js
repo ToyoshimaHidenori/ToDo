@@ -356,7 +356,7 @@ const App = (props) => {
         {taskState.todayTasks.map((todayTask, index) => {
           if (todayTask.isDone) {
             return (
-              <CSSTransition key={todayTask.id} timeout={1000} classNames="hi">
+              <CSSTransition key={todayTask.id} timeout={5000} classNames="hi">
                 <Task
                   key={todayTask.id}
                   name={todayTask.name}
