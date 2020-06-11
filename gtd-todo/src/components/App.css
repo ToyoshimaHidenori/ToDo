@@ -22,6 +22,10 @@ body {
   text-shadow: 0px 0px 5px #6595d8;
 }
 
+.hi {
+  margin: 0px;
+}
+
 .hi-enter {
   opacity: 0;
   max-height: 0px;
@@ -38,13 +42,13 @@ body {
 }
 
 .hi-exit {
-  max-height: 120px;
+  max-height: 1200px;
   opacity: 1;
 }
 
 .hi-exit-active {
   opacity: 0;
-  transition: 0.3s;
+  transition: 1s;
   max-height: 0px;
 }
 
