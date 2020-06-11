@@ -303,7 +303,7 @@ const App = (props) => {
           className="twitter-share-button"
           data-size="large"
           data-text={"✨✨今日のタスクが完了しました✨✨"}
-          data-url="https://toyoshimahidenori.github.io/ToDo/gtd-todo/build/index.html"
+          data-url="https://neutodo.com/gtd-todo/build/index.html"
           data-hashtags="NeuToDo"
           data-show-count="false"
         >
