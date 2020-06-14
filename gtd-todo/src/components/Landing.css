@@ -14,6 +14,7 @@ section {
   margin-bottom: 30px;
   padding: 15px 5px 10px 5px;
   border-radius: 10px;
+  display: flex;
   background-color: #e0dfea;
   box-shadow: 8px 8px 10px #cfced4, -8px -8px 10px #f0f0f0;
 }
@@ -45,6 +46,7 @@ span {
 }
 
 .Landing img {
+  max-width: 450px;
   width: 70%;
   padding-left: 15%;
 }
@@ -54,4 +56,57 @@ span {
   color: gray;
   margin: 10px;
   font-size: medium;
+}
+
+.Landing section div {
+  margin: auto;
+}
+
+.Landing .ToTask button {
+  animation: showb 2s;
+  border-radius: 10px;
+  /* background: #e0dfea;
+	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: #e0dfea;
+  box-shadow: 10px 10px 15px #bab9c2, -10px -10px 15px #ffffff;
+  font-size: 1em;
+  font-weight: bold;
+  color: #1c64ff;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 35px;
+  padding: 15px 15px 12px 15px;
+  border-style: none;
+  outline: none;
+  transition-duration: 0.7s;
+}
+
+.Landing button:hover {
+  /* background: linear-gradient(145deg, #f0effa, #cac9d3);
+	  box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: linear-gradient(145deg, #cac9d3, #f0effa);
+  box-shadow: 3px 3px 5px #cccbd5, -3px -3px 5px #f4f3ff;
+  color: #1c64ff;
+  text-shadow: 0px 0px 3px #026efa;
+}
+
+.Landing .ToTask {
+  text-align: center;
+  padding: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .Landing section {
+    display: block;
+  }
+  .Landing img {
+    width: 70%;
+    padding-left: 15%;
+    margin: 0 auto;
+  }
+  .Landing .text {
+    width: 100%;
+    margin: 0 auto;
+  }
 }
