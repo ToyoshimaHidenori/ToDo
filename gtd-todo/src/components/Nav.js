@@ -7,7 +7,6 @@ const Nav = (props) => {
     <div>
       <ul className="nav">
         <li className="logo">{props.children}</li>
-
         <Link to="/">
           <li>
             <svg

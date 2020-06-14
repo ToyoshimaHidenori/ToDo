@@ -52,7 +52,7 @@ const App = (props) => {
     todayTasks: [
       {
         id: "asdfas",
-        name: "アプリにアクセスする",
+        name: "NeuToDoにアクセスする",
         isDone: true,
         endTime: Date.parse(2020 / 10 / 21),
         taskMinites: 10,

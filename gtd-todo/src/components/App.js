@@ -9,45 +9,57 @@ import {
 } from "react-router-dom";
 import TodoApp from "./TodoApp";
 import Nav from "./Nav";
+import Landing from "./Landing";
+import "./App.css";
 
 export default function App() {
   return (
     <Router>
-      <Nav>Neu ToDo</Nav>
-      <div>
-        <Switch>
-          <Route path="/home">
-            <TodoApp />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/contact">
-            <Contact />
-          </Route>
-          <Route path="/policy">
-            <Policy />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signin">
-            <Signin />
-          </Route>
-          <Route path="/help">
-            <Help />
-          </Route>
-          <Route exact path="/">
-            <Landing />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
+      <div className="wrapper">
+        <Nav>Neu ToDo</Nav>
+        <div>
+          <Switch>
+            <Route path="/home">
+              <TodoApp />
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+            <Route path="/contact">
+              <Contact />
+            </Route>
+            <Route path="/policy">
+              <Policy />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/signin">
+              <Signin />
+            </Route>
+            <Route path="/help">
+              <Help />
+            </Route>
+            <Route exact path="/">
+              <Landing />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </div>
+        <div className="footer">
+          <div className="Links">
+            <Link to="/policy">プライバシーポリシー&利用規約</Link>
+          </div>
+          <div className="Links">
+            <Link to="/contact">お問い合わせ</Link>
+          </div>
+          <small>
+            ©︎<a href="https://toyo.dev">Toyoshima Hidenori</a> 2020, v1.0.0
+          </small>
+        </div>
       </div>
-      <small>
-        ©︎<a href="https://toyo.dev">Toyoshima Hidenori</a> 2020, v1.0.0
-      </small>
     </Router>
   );
 }
@@ -56,12 +68,8 @@ function Contact() {
   return <h2>Contact</h2>;
 }
 
-function Landing() {
-  return <h2>Landing</h2>;
-}
-
 function Policy() {
-  return <h2>Contact</h2>;
+  return <h2>Policy</h2>;
 }
 
 function Login() {
