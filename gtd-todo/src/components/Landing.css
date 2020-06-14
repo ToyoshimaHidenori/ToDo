@@ -1,0 +1,57 @@
+.Landing h1 {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bolder;
+  margin: 20px;
+  margin-bottom: 10px;
+  font-family: "Average Sans", sans-serif;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+}
+
+section {
+  margin: 10px;
+  margin-bottom: 30px;
+  padding: 15px 5px 10px 5px;
+  border-radius: 10px;
+  background-color: #e0dfea;
+  box-shadow: 8px 8px 10px #cfced4, -8px -8px 10px #f0f0f0;
+}
+
+.Landing h2 {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bolder;
+  margin: 10px;
+  margin-bottom: 10px;
+  font-family: "Average Sans", sans-serif;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+}
+
+.LandingHeader {
+  border-radius: 10px;
+  background-color: #e0dfea;
+  box-shadow: none;
+}
+
+span {
+  display: inline-block;
+}
+
+.SampleTask {
+  margin: 0px;
+  padding: 0px;
+}
+
+.Landing img {
+  width: 70%;
+  padding-left: 15%;
+}
+
+.Landing p {
+  text-align: center;
+  color: gray;
+  margin: 10px;
+  font-size: medium;
+}

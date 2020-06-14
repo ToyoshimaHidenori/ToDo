@@ -1,0 +1,38 @@
+.wrapper {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 200px;
+  box-sizing: border-box;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  /* box-shadow: inset 10px 10px 20px #aeb4c0;
+  border-radius: 10px 10px 0px 0px; */
+  box-shadow: inset 10px 0px 20px #aeb4c0;
+  background-color: #c6d3f0;
+  color: rgb(88, 88, 88);
+  text-align: center;
+  padding: 30px 0;
+}
+.footer a {
+  text-decoration: none;
+  color: rgb(129, 129, 129);
+}
+
+.Links {
+  display: inline-flex;
+  box-pack: justify;
+  font-size: small;
+  font-weight: 500;
+  margin: 10px;
+}
+.footer .Links a {
+  color: rgb(73, 73, 73);
+}
+.footer small {
+  color: rgb(129, 129, 129);
+}
