@@ -13,6 +13,7 @@
     "react-animate-height": "^2.0.21",
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.4.1"
   },
