@@ -49,11 +49,13 @@ export default function App() {
           </Switch>
         </div>
         <div className="footer">
-          <div className="Links">
-            <Link to="/policy">プライバシーポリシー&利用規約</Link>
-          </div>
-          <div className="Links">
-            <Link to="/contact">お問い合わせ</Link>
+          <div>
+            <div className="Links">
+              <Link to="/policy">プライバシーポリシー&利用規約</Link>
+            </div>
+            <div className="Links">
+              <Link to="/contact">お問い合わせ</Link>
+            </div>
           </div>
           <small>
             ©︎<a href="https://toyo.dev">Toyoshima Hidenori</a> 2020, v1.0.0
@@ -91,7 +93,7 @@ function Users() {
   let match = useRouteMatch();
 
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <h2>進捗公開機能(coming soon!)</h2>
       <p>他の人の頑張りを見ることができます。</p>
       <Switch>

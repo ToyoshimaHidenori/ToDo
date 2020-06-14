@@ -97,6 +97,15 @@
   outline: none;
   transition-duration: 0.7s;
 }
+
+.Task button:hover {
+  /* background: linear-gradient(145deg, #f0effa, #cac9d3);
+	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: linear-gradient(145deg, #cac9d3, #f0effa);
+  box-shadow: 5px 5px 10px #cccbd5, -5px -5px 10px #f4f3ff;
+  color: #026efa;
+}
+
 .Task .Checked .CheckBox {
   animation: showbc 2s;
   color: #dfdfdf;
@@ -104,13 +113,7 @@
     inset 2px 2px 5px #4c7ab6, inset -2px -2px 5px #8ebfff;
   background-color: #4e98f8;
 }
-.Task button:hover {
-  /* background: linear-gradient(145deg, #f0effa, #cac9d3);
-  box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
-  background: linear-gradient(145deg, #cac9d3, #f0effa);
-  box-shadow: 5px 5px 10px #cccbd5, -5px -5px 10px #f4f3ff;
-  color: #026efa;
-}
+
 .Task .Checked button:hover {
   background: linear-gradient(145deg, #cac9d3, #f0effa);
   color: #026efa;
