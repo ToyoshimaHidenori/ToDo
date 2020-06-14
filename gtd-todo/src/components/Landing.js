@@ -74,7 +74,9 @@ const Landing = (props) => {
         </div>
       </section>
       <section className="ToTask">
-        <h2>NeuToDo へようこそ！</h2>
+        <div>
+          <h2>NeuToDo へようこそ！</h2>
+        </div>
         <Link to="/home">
           <button>完全無料で始める</button>
         </Link>
