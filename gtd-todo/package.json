@@ -4,7 +4,7 @@
   "private": true,
   "author": "ToyoshimaHidenori",
   "license": "MIT",
-  "homepage": "https://neutodo.com/gtd-todo/build",
+  "homepage": "https://neutodo.com",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
