@@ -93,7 +93,8 @@ span {
 
 .Landing .ToTask {
   text-align: center;
-  padding: 20px;
+  margin-top: px;
+  padding: 10px;
 }
 
 @media screen and (max-width: 767px) {

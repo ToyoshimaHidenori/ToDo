@@ -8,15 +8,14 @@ import {
   useRouteMatch,
   useParams,
   useHistory,
-  useLocation,
 } from "react-router-dom";
 import TodoApp from "./TodoApp";
 import Nav from "./Nav";
 import Landing from "./Landing";
+import Login from "./Login";
 import "./App.css";
 import firebase from "firebase";
 import "firebase/auth";
-// import {base} from "../fire";
 
 var firebaseConfig = {
   apiKey: "AIzaSyAIZ8k0Ego7xGT0x1uc0dIFUFK-iUMhGO8",
@@ -36,7 +35,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(setCurrentUser);
+    firebase.auth().onAuthStateChanged((user) => setCurrentUser(user));
   }, []);
 
   return (
@@ -48,6 +47,9 @@ export default function App() {
             <Route path="/guest/home">
               <TodoApp />
             </Route>
+            <PrivateRoute path="/home/calender" currentUser={currentUser}>
+              <p>coming soon!</p>
+            </PrivateRoute>
             <PrivateRoute path="/home" currentUser={currentUser}>
               <TodoApp />
             </PrivateRoute>
@@ -61,10 +63,7 @@ export default function App() {
               <Policy />
             </Route>
             <Route path="/login" currentUsery={currentUser}>
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <SignUp />
+              <Login firebase={firebase} user={currentUser} />
             </Route>
             <Route path="/help">
               <Help />
@@ -120,46 +119,6 @@ function Policy() {
       </p>
     </div>
   );
-}
-
-const loginWithGoogle = async () => {
-  try {
-    var googleProvider = new firebase.auth.GoogleAuthProvider();
-    await firebase.auth().signInWithRedirect(googleProvider);
-  } catch (error) {
-    alert(error);
-  }
-};
-
-const loginWithTwitter = async () => {
-  try {
-    var twitterProvider = new firebase.auth.TwitterAuthProvider();
-    await firebase.auth().signInWithRedirect(twitterProvider);
-  } catch (error) {
-    alert(error);
-  }
-};
-
-function Login() {
-  let history = useHistory();
-  var user = firebase.auth().currentUser;
-  if (user) {
-    history.push("/home");
-    return <div>Now Loading...</div>;
-  } else
-    return (
-      <div>
-        <button onClick={() => loginWithGoogle(history)}>
-          Log in with google
-        </button>
-        <button onClick={() => loginWithTwitter(history)}>
-          Log in with twitter
-        </button>
-      </div>
-    );
-}
-function SignUp() {
-  return <h2>Contact</h2>;
 }
 
 function Help() {
