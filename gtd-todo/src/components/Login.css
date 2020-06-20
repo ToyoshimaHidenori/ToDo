@@ -1,0 +1,99 @@
+.Login h1 {
+  font-size: x-large;
+  font-weight: bolder;
+  margin: 20px;
+  margin-bottom: 10px;
+  font-family: "Average Sans", sans-serif;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+}
+
+.Login h2 {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bolder;
+  margin: 10px;
+  margin-bottom: 10px;
+  font-family: "Average Sans", sans-serif;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+}
+
+.Login p {
+  text-align: center;
+  color: gray;
+  margin: 10px;
+  font-size: medium;
+}
+
+section {
+  margin: 9%;
+  width: 80%;
+  margin-bottom: 30px;
+  padding: 15px 5px 10px 5px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: #e0dfea;
+  box-shadow: 8px 8px 10px #cfced4, -8px -8px 10px #f0f0f0;
+  justify-content: center;
+  align-items: center;
+}
+
+span {
+  display: inline-block;
+}
+
+.Login img {
+  text-align: center;
+  max-width: 200px;
+  width: 70%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  box-shadow: 3px 3px 5px #cccbd5, -3px -3px 5px #f4f3ff;
+}
+
+.Login button {
+  text-align: center;
+  max-width: 194px;
+  width: 70%;
+  border: none;
+  border-radius: 4px;
+  margin: 4px;
+  margin-top: 30px;
+  font-size: medium;
+  font-weight: 800;
+  padding: 4px;
+  min-height: 40px;
+  background-color: #00acee;
+  box-shadow: 3px 3px 5px #cccbd5, -3px -3px 5px #f4f3ff;
+  color: #f4f3ff;
+}
+.Login button svg {
+  margin: 0px;
+  height: 18px;
+  margin-right: 5px;
+}
+
+.Login p {
+  text-align: center;
+  color: gray;
+  margin: 10px;
+  font-size: medium;
+}
+
+@media screen and (max-width: 767px) {
+  .Landing section {
+    display: block;
+  }
+  .Landing img {
+    width: 70%;
+    padding-left: 15%;
+    margin: 0 auto;
+  }
+  .Landing .text {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
