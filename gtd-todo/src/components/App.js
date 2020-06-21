@@ -100,10 +100,10 @@ export default function App() {
           </small>
         </div>
       </div>
-      <p className="App-intro">
+      {/* <p className="App-intro">
         UID: {firebase.auth().currentUser && firebase.auth().currentUser.uid}
       </p>
-      <p className="App-intro">UID: {currentUser && currentUser.uid}</p>
+      <p className="App-intro">UID: {currentUser && currentUser.uid}</p> */}
     </Router>
   );
 }
