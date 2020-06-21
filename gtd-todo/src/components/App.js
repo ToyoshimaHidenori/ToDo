@@ -7,7 +7,6 @@ import {
   Redirect,
   useRouteMatch,
   useParams,
-  useHistory,
 } from "react-router-dom";
 import TodoApp from "./TodoApp";
 import Nav from "./Nav";
@@ -30,6 +29,12 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+const firebaseDb = firebase.database();
+
+let loading = false;
+const toggleLoading = () => {
+  loading = loading ? false : true;
+};
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -51,7 +56,7 @@ export default function App() {
               <p>coming soon!</p>
             </PrivateRoute>
             <PrivateRoute path="/home" currentUser={currentUser}>
-              <TodoApp />
+              <TodoApp firebase={firebase} />
             </PrivateRoute>
             <Route path="/users">
               <Users />
@@ -63,7 +68,12 @@ export default function App() {
               <Policy />
             </Route>
             <Route path="/login" currentUsery={currentUser}>
-              <Login firebase={firebase} user={currentUser} />
+              <Login
+                firebase={firebase}
+                user={currentUser}
+                loading={loading}
+                toggleLoading={() => toggleLoading()}
+              />
             </Route>
             <Route path="/help">
               <Help />
@@ -90,9 +100,10 @@ export default function App() {
           </small>
         </div>
       </div>
-      {/* <p className="App-intro">
+      <p className="App-intro">
         UID: {firebase.auth().currentUser && firebase.auth().currentUser.uid}
-      </p> */}
+      </p>
+      <p className="App-intro">UID: {currentUser && currentUser.uid}</p>
     </Router>
   );
 }

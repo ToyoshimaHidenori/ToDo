@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TodoApp.css";
 import Task from "./Task";
 import {
@@ -6,19 +6,17 @@ import {
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import firebase from "firebase";
+import "firebase/auth";
 
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import CSSTransition from "react-transition-group/CSSTransition";
 
 // Hook
 function useLocalStorage(key, initialValue) {
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState(() => {
     try {
-      // Get from local storage by key
       const item = window.localStorage.getItem(key);
-      // Parse stored json or if none return initialValue
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       // If error also return initialValue
@@ -47,7 +45,7 @@ function useLocalStorage(key, initialValue) {
   return [storedValue, setValue];
 }
 
-const App = (props) => {
+const TodoApp = (props) => {
   const [taskState, setTaskState] = useLocalStorage("taskState", {
     todayTasks: [
       {
@@ -75,6 +73,20 @@ const App = (props) => {
   ]);
 
   let tweetMin = progressState[0];
+
+  var firebase = props.firebase;
+  var firebaseDb = firebase.database();
+
+  useEffect(() => {
+    var connectedRef = firebase.database().ref(".info/connected");
+    // connectedRef.on("value", function (snap) {
+    //   if (snap.val() === true) {
+    //     alert("connect" + firebase.auth().currentUser.uid);
+    //   } else {
+    //     alert("disconnet" + firebase.auth().currentUser.uid);
+    //   }
+    // });
+  });
 
   const resetTaskHandler = () => {
     setTaskState({
@@ -378,4 +390,4 @@ const App = (props) => {
   );
 };
 
-export default App;
+export default TodoApp;
