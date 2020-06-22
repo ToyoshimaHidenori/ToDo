@@ -13,7 +13,7 @@ import TransitionGroup from "react-transition-group/TransitionGroup";
 import CSSTransition from "react-transition-group/CSSTransition";
 
 // Hook
-function useLocalStorage(key, initialValue) {
+const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -43,28 +43,20 @@ function useLocalStorage(key, initialValue) {
   };
 
   return [storedValue, setValue];
-}
+};
 
 const TodoApp = (props) => {
-  const [taskState, setTaskState] = useLocalStorage("taskState", {
-    todayTasks: [
-      {
+  const [taskState, setTaskState] = useState({
+    todayTasks: {
+      asdfas: {
         id: "asdfas",
-        name: "NeuToDoにアクセスする",
-        isDone: true,
-        endTime: Date.parse(2020 / 10 / 21),
-        taskMinites: 10,
-        rank: "A",
-      },
-      {
-        id: "afffdjkdk",
-        name: "Task を登録する",
+        name: "Now loading ...",
         isDone: false,
-        endTime: Date(),
-        taskMinites: 20,
+        endTime: Date.parse(2020 / 10 / 21),
+        taskMinites: 0,
         rank: "A",
       },
-    ],
+    },
   });
 
   const [progressState, setProgressState] = useLocalStorage("progressState", [
@@ -76,9 +68,55 @@ const TodoApp = (props) => {
 
   var firebase = props.firebase;
   var firebaseDb = firebase.database();
+  const userId = firebase.auth().currentUser.uid;
+  var todayTasksRef = firebaseDb.ref("users/" + userId + "/todayTasks");
+  useEffect(() => {
+    firebaseDb
+      .ref("users/" + userId + "/todayTasks")
+      .once("value", function (snapshot) {
+        console.log("here" + snapshot + " : " + snapshot.val());
+        if (snapshot.val() === null) {
+          console.log("here^");
+          firebase
+            .database()
+            .ref("users/" + userId + "/todayTasks")
+            .set({
+              asdfas: {
+                id: "asdfas",
+                name: "NeuToDoにアクセスする",
+                isDone: true,
+                endTime: 2020 / 10 / 21,
+                taskMinites: 10,
+                rank: "A",
+              },
+              afffdjkdk: {
+                id: "afffdjkdk",
+                name: "Task を登録する",
+                isDone: false,
+                endTime: Date(),
+                taskMinites: 20,
+                rank: "A",
+              },
+            });
+          console.log(snapshot.val() + " is initialized");
+        }
+      });
+  }, []);
+  useEffect(() => {
+    todayTasksRef.on("value", function (snapshot) {
+      if (snapshot.val() != null) {
+        setTaskState({ todayTasks: snapshot.val() });
+      } else {
+        console.log("loading!!");
+        setTaskState({ todayTasks: "" });
+      }
+      console.log(snapshot.val());
+      console.log("catch changed data from db");
+    });
+  }, []);
 
   useEffect(() => {
-    var connectedRef = firebase.database().ref(".info/connected");
+    var connectedRef = firebaseDb.ref(".info/connected");
     // connectedRef.on("value", function (snap) {
     //   if (snap.val() === true) {
     //     alert("connect" + firebase.auth().currentUser.uid);
@@ -88,41 +126,29 @@ const TodoApp = (props) => {
     // });
   });
 
-  const resetTaskHandler = () => {
-    setTaskState({
-      todayTasks: [
-        {
-          id: "asdfas",
-          name: "Sample1",
-          isDone: false,
-          endTime: Date.parse(2020 / 10 / 21),
-          taskMinites: 30,
-          rank: "A",
-        },
-        {
-          id: "afffdjkdk",
-          name: "Sample2",
-          isDone: false,
-          endTime: Date(),
-          taskMinites: 30,
-          rank: "B",
-        },
-      ],
-    });
-    setProgressState([0, 60]);
-  };
-
   const addTaskHandler = () => {
     const todayTasks = taskState.todayTasks;
-    todayTasks.push({
-      id: Math.random().toString(32).substring(2),
-      name: "",
-      isDone: false,
-      endTime: Date(),
-      taskMinites: 30,
-      rank: "A",
-    });
-    setTaskState({ todayTasks });
+    const key = Math.random().toString(32).substring(2);
+    firebase
+      .database()
+      .ref("users/" + userId + "/todayTasks/" + key)
+      .set({
+        id: key,
+        name: "",
+        isDone: false,
+        endTime: Date(),
+        taskMinites: 30,
+        rank: "A",
+      });
+    // todayTasks.push({
+    //   id: key,
+    //   name: "",
+    //   isDone: false,
+    //   endTime: Date(),
+    //   taskMinites: 30,
+    //   rank: "A",
+    // });
+    // setTaskState({ todayTasks });
     calcProgress();
   };
 
@@ -222,10 +248,10 @@ const TodoApp = (props) => {
   const calcProgress = () => {
     let allTaskMin = 0;
     let doneTaskMin = 0;
-    taskState.todayTasks.forEach((todayTask, index, array) => {
-      allTaskMin += Number(todayTask.taskMinites);
-      if (todayTask.isDone) {
-        doneTaskMin += Number(todayTask.taskMinites);
+    Object.keys(taskState.todayTasks).forEach((key) => {
+      allTaskMin += Number(taskState.todayTasks[key].taskMinites);
+      if (taskState.todayTasks[key].isDone) {
+        doneTaskMin += Number(taskState.todayTasks[key].taskMinites);
       }
     });
     setProgressState([doneTaskMin, allTaskMin]);
@@ -330,26 +356,39 @@ const TodoApp = (props) => {
       ></progress>
 
       <TransitionGroup>
-        {taskState.todayTasks.map((todayTask, index) => {
-          if (!todayTask.isDone) {
+        {Object.keys(taskState.todayTasks).map((key) => {
+          if (!taskState.todayTasks[key].isDone) {
+            console.log("task!");
+            console.log(taskState.todayTasks[key].id);
             return (
-              <CSSTransition key={todayTask.id} timeout={1000} classNames="hi">
+              <CSSTransition
+                key={taskState.todayTasks[key].id}
+                timeout={500}
+                classNames="hi"
+              >
                 <Task
-                  key={todayTask.id}
-                  name={todayTask.name}
-                  isDone={todayTask.isDone}
-                  endTime={todayTask.endTime}
-                  rank={todayTask.rank}
-                  taskMinites={todayTask.taskMinites}
+                  key={taskState.todayTasks[key].id}
+                  name={taskState.todayTasks[key].name}
+                  isDone={taskState.todayTasks[key].isDone}
+                  endTime={taskState.todayTasks[key].endTime}
+                  rank={taskState.todayTasks[key].rank}
+                  taskMinites={taskState.todayTasks[key].taskMinites}
                   taskMinitesChange={(event) =>
-                    taskMinitesChangedHandler(event, todayTask.id)
+                    taskMinitesChangedHandler(
+                      event,
+                      taskState.todayTasks[key].id
+                    )
                   }
-                  done={(event) => toggleDoneHandler(event, todayTask.id)}
-                  delete={() => deleteTaskHandler(index)}
+                  done={(event) =>
+                    toggleDoneHandler(event, taskState.todayTasks[key].id)
+                  }
+                  delete={() => deleteTaskHandler(key)}
                   rankChange={(event) =>
-                    rankChangedHandler(event, todayTask.id)
+                    rankChangedHandler(event, taskState.todayTasks[key].id)
                   }
-                  change={(event) => nameChangedHandler(event, todayTask.id)}
+                  change={(event) =>
+                    nameChangedHandler(event, taskState.todayTasks[key].id)
+                  }
                 />
               </CSSTransition>
             );
@@ -360,26 +399,37 @@ const TodoApp = (props) => {
         <button onClick={addTaskHandler}>Add task</button>
       </div>
       <TransitionGroup>
-        {taskState.todayTasks.map((todayTask, index) => {
-          if (todayTask.isDone) {
+        {Object.keys(taskState.todayTasks).map((key) => {
+          if (taskState.todayTasks[key].isDone) {
             return (
-              <CSSTransition key={todayTask.id} timeout={500} classNames="hi">
+              <CSSTransition
+                key={taskState.todayTasks[key].id}
+                timeout={500}
+                classNames="hi"
+              >
                 <Task
-                  key={todayTask.id}
-                  name={todayTask.name}
-                  isDone={todayTask.isDone}
-                  endTime={todayTask.endTime}
-                  rank={todayTask.rank}
-                  taskMinites={todayTask.taskMinites}
+                  key={taskState.todayTasks[key].id}
+                  name={taskState.todayTasks[key].name}
+                  isDone={taskState.todayTasks[key].isDone}
+                  endTime={taskState.todayTasks[key].endTime}
+                  rank={taskState.todayTasks[key].rank}
+                  taskMinites={taskState.todayTasks[key].taskMinites}
                   taskMinitesChange={(event) =>
-                    taskMinitesChangedHandler(event, todayTask.id)
+                    taskMinitesChangedHandler(
+                      event,
+                      taskState.todayTasks[key].id
+                    )
                   }
-                  done={(event) => toggleDoneHandler(event, todayTask.id)}
-                  delete={() => deleteTaskHandler(index)}
+                  done={(event) =>
+                    toggleDoneHandler(event, taskState.todayTasks[key].id)
+                  }
+                  delete={() => deleteTaskHandler(key)}
                   rankChange={(event) =>
-                    rankChangedHandler(event, todayTask.id)
+                    rankChangedHandler(event, taskState.todayTasks[key].id)
                   }
-                  change={(event) => nameChangedHandler(event, todayTask.id)}
+                  change={(event) =>
+                    nameChangedHandler(event, taskState.todayTasks[key].id)
+                  }
                 />
               </CSSTransition>
             );
