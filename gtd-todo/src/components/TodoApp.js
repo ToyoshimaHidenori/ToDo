@@ -7,7 +7,7 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import "firebase/auth";
-
+import { BrowserRouter as Router } from "react-router-dom";
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import CSSTransition from "react-transition-group/CSSTransition";
 
@@ -33,6 +33,14 @@ const TodoApp = (props) => {
   var firebaseDb = firebase.database();
   const userId = firebase.auth().currentUser.uid;
   var todayTasksRef = firebaseDb.ref("users/" + userId + "/todayTasks");
+  useEffect(() => {
+    window.addEventListener("beforeunload", () =>
+      firebase.database().goOffline()
+    );
+    return window.removeEventListener("beforeunload", () =>
+      firebase.database().goOffline()
+    );
+  });
   useEffect(() => {
     firebaseDb
       .ref("users/" + userId + "/todayTasks")
