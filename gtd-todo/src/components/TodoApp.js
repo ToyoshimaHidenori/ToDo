@@ -6,44 +6,10 @@ import {
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import firebase from "firebase";
 import "firebase/auth";
 
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import CSSTransition from "react-transition-group/CSSTransition";
-
-// Hook
-const useLocalStorage = (key, initialValue) => {
-  const [storedValue, setStoredValue] = useState(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      // If error also return initialValue
-      console.log(error);
-      return initialValue;
-    }
-  });
-
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value) => {
-    try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      // A more advanced implementation would handle the error case
-      console.log(error);
-    }
-  };
-
-  return [storedValue, setValue];
-};
 
 const TodoApp = (props) => {
   const [taskState, setTaskState] = useState({
@@ -59,10 +25,7 @@ const TodoApp = (props) => {
     },
   });
 
-  const [progressState, setProgressState] = useLocalStorage("progressState", [
-    10,
-    30,
-  ]);
+  const [progressState, setProgressState] = useState([0, 1]);
 
   let tweetMin = progressState[0];
 
@@ -74,9 +37,7 @@ const TodoApp = (props) => {
     firebaseDb
       .ref("users/" + userId + "/todayTasks")
       .once("value", function (snapshot) {
-        console.log("here" + snapshot + " : " + snapshot.val());
         if (snapshot.val() === null) {
-          console.log("here^");
           firebase
             .database()
             .ref("users/" + userId + "/todayTasks")
@@ -85,20 +46,34 @@ const TodoApp = (props) => {
                 id: "asdfas",
                 name: "NeuToDoにアクセスする",
                 isDone: true,
-                endTime: 2020 / 10 / 21,
+                endTime: null,
+                notificationTime: null,
                 taskMinites: 10,
-                rank: "A",
               },
               afffdjkdk: {
                 id: "afffdjkdk",
                 name: "Task を登録する",
                 isDone: false,
-                endTime: Date(),
+                endTime: null,
+                notificationTime: null,
                 taskMinites: 20,
-                rank: "A",
               },
             });
-          console.log(snapshot.val() + " is initialized");
+          firebase
+            .database()
+            .ref("users/" + userId + "/settings")
+            .set({ userName: "匿名" });
+          setProgressState([10, 30]);
+        } else {
+          let allTaskMin = 0;
+          let doneTaskMin = 0;
+          Object.keys(snapshot.val()).map((key) => {
+            allTaskMin += Number(snapshot.val()[key].taskMinites);
+            if (snapshot.val()[key].isDone) {
+              doneTaskMin += Number(snapshot.val()[key].taskMinites);
+            }
+          });
+          setProgressState([doneTaskMin, allTaskMin]);
         }
       });
   }, []);
@@ -107,11 +82,8 @@ const TodoApp = (props) => {
       if (snapshot.val() != null) {
         setTaskState({ todayTasks: snapshot.val() });
       } else {
-        console.log("loading!!");
         setTaskState({ todayTasks: "" });
       }
-      console.log(snapshot.val());
-      console.log("catch changed data from db");
     });
   }, []);
 
@@ -127,7 +99,6 @@ const TodoApp = (props) => {
   });
 
   const addTaskHandler = () => {
-    const todayTasks = taskState.todayTasks;
     const key = Math.random().toString(32).substring(2);
     firebase
       .database()
@@ -140,115 +111,61 @@ const TodoApp = (props) => {
         taskMinites: 30,
         rank: "A",
       });
-    // todayTasks.push({
-    //   id: key,
-    //   name: "",
-    //   isDone: false,
-    //   endTime: Date(),
-    //   taskMinites: 30,
-    //   rank: "A",
-    // });
-    // setTaskState({ todayTasks });
-    calcProgress();
+    setProgressState([progressState[0], progressState[1] + 30]);
   };
 
-  const toggleDoneHandler = (event, id) => {
-    const todayTaskIndex = taskState.todayTasks.findIndex((t) => {
-      return t.id === id;
-    });
-    const todayTask = {
-      ...taskState.todayTasks[todayTaskIndex],
-    };
-    todayTask.isDone = todayTask.isDone ? false : true;
-    const todayTasks = [...taskState.todayTasks];
-    todayTasks[todayTaskIndex] = todayTask;
-    setTaskState({ todayTasks: todayTasks });
-
-    let allTaskMin = 0;
-    let doneTaskMin = 0;
-    taskState.todayTasks.forEach((todayTask, index, array) => {
-      allTaskMin += Number(todayTask.taskMinites);
-      if (todayTask.isDone) {
-        doneTaskMin += Number(todayTask.taskMinites);
-      }
-    });
-
-    if (todayTask.isDone) {
-      doneTaskMin += Number(todayTask.taskMinites);
+  const toggleDoneHandler = (event, key) => {
+    firebase
+      .database()
+      .ref("users/" + userId + "/todayTasks/" + key + "/isDone")
+      .set(taskState.todayTasks[key].isDone ? false : true);
+    if (taskState.todayTasks[key].isDone) {
+      setProgressState([
+        Number(progressState[0]) -
+          Number(taskState.todayTasks[key].taskMinites),
+        progressState[1],
+      ]);
     } else {
-      doneTaskMin -= Number(todayTask.taskMinites);
+      setProgressState([
+        Number(progressState[0]) +
+          Number(taskState.todayTasks[key].taskMinites),
+        progressState[1],
+      ]);
     }
-    setProgressState([doneTaskMin, allTaskMin]);
   };
 
-  const nameChangedHandler = (event, id) => {
-    const todayTaskIndex = taskState.todayTasks.findIndex((t) => {
-      return t.id === id;
-    });
-    const todayTask = {
-      ...taskState.todayTasks[todayTaskIndex],
-    };
-    todayTask.name = event.target.value;
-    const todayTasks = [...taskState.todayTasks];
-    todayTasks[todayTaskIndex] = todayTask;
-    setTaskState({ todayTasks: todayTasks });
+  const nameChangedHandler = (event, key) => {
+    firebase
+      .database()
+      .ref("users/" + userId + "/todayTasks/" + key + "/name")
+      .set(event.target.value);
   };
 
-  const taskMinitesChangedHandler = (event, id) => {
-    const todayTaskIndex = taskState.todayTasks.findIndex((t) => {
-      return t.id === id;
-    });
+  const taskMinitesChangedHandler = (event, key) => {
+    firebase
+      .database()
+      .ref("users/" + userId + "/todayTasks/" + key + "/taskMinites")
+      .set(event.target.value);
+
     const todayTask = {
-      ...taskState.todayTasks[todayTaskIndex],
+      ...taskState.todayTasks[key],
     };
     const diff = Number(event.target.value) - Number(todayTask.taskMinites);
-    console.log(event.target.value);
-    console.log(todayTask.taskMinites);
-    todayTask.taskMinites = event.target.value;
-    const todayTasks = [...taskState.todayTasks];
-    todayTasks[todayTaskIndex] = todayTask;
-    setTaskState({ todayTasks: todayTasks });
-
-    let allTaskMin = 0;
-    let doneTaskMin = 0;
-    taskState.todayTasks.forEach((todayTask, index, array) => {
-      allTaskMin += Number(todayTask.taskMinites);
-      if (todayTask.isDone) {
-        doneTaskMin += Number(todayTask.taskMinites);
-      }
-    });
-
-    allTaskMin += Number(diff);
     if (todayTask.isDone) {
-      doneTaskMin += Number(diff);
+      setProgressState([progressState[0] + diff, progressState[1] + diff]);
+    } else {
+      setProgressState([progressState[0], progressState[1] + diff]);
     }
-    setProgressState([doneTaskMin, allTaskMin]);
   };
 
-  const rankChangedHandler = (event, id) => {
-    const todayTaskIndex = taskState.todayTasks.findIndex((t) => {
-      return t.id === id;
-    });
-    const todayTask = {
-      ...taskState.todayTasks[todayTaskIndex],
-    };
-    todayTask.rank = event.target.value;
-    const todayTasks = [...taskState.todayTasks];
-    todayTasks[todayTaskIndex] = todayTask;
-    setTaskState({ todayTasks: todayTasks });
-  };
-
-  const deleteTaskHandler = (taskIndex) => {
-    // const todayTasks = taskState.todayTasks.slice();
-    const todayTaskstmp = taskState.todayTasks;
-    todayTaskstmp.splice(taskIndex, 1);
-    calcProgress(setTaskState({ todayTasks: todayTaskstmp }));
+  const deleteTaskHandler = (key) => {
+    firebaseDb.ref("users/" + userId + "/todayTasks/" + key).remove();
   };
 
   const calcProgress = () => {
     let allTaskMin = 0;
     let doneTaskMin = 0;
-    Object.keys(taskState.todayTasks).forEach((key) => {
+    Object.keys(taskState.todayTasks).map((key) => {
       allTaskMin += Number(taskState.todayTasks[key].taskMinites);
       if (taskState.todayTasks[key].isDone) {
         doneTaskMin += Number(taskState.todayTasks[key].taskMinites);
@@ -306,7 +223,7 @@ const TodoApp = (props) => {
                     textShadow: "0px 0px 7px #1c64ff",
                   }}
                 >
-                  {(tweetMin = progressState[0])}
+                  {progressState[0]}
                 </div>
                 <div
                   style={{
@@ -358,8 +275,6 @@ const TodoApp = (props) => {
       <TransitionGroup>
         {Object.keys(taskState.todayTasks).map((key) => {
           if (!taskState.todayTasks[key].isDone) {
-            console.log("task!");
-            console.log(taskState.todayTasks[key].id);
             return (
               <CSSTransition
                 key={taskState.todayTasks[key].id}
@@ -371,7 +286,6 @@ const TodoApp = (props) => {
                   name={taskState.todayTasks[key].name}
                   isDone={taskState.todayTasks[key].isDone}
                   endTime={taskState.todayTasks[key].endTime}
-                  rank={taskState.todayTasks[key].rank}
                   taskMinites={taskState.todayTasks[key].taskMinites}
                   taskMinitesChange={(event) =>
                     taskMinitesChangedHandler(
@@ -383,9 +297,6 @@ const TodoApp = (props) => {
                     toggleDoneHandler(event, taskState.todayTasks[key].id)
                   }
                   delete={() => deleteTaskHandler(key)}
-                  rankChange={(event) =>
-                    rankChangedHandler(event, taskState.todayTasks[key].id)
-                  }
                   change={(event) =>
                     nameChangedHandler(event, taskState.todayTasks[key].id)
                   }
@@ -412,7 +323,6 @@ const TodoApp = (props) => {
                   name={taskState.todayTasks[key].name}
                   isDone={taskState.todayTasks[key].isDone}
                   endTime={taskState.todayTasks[key].endTime}
-                  rank={taskState.todayTasks[key].rank}
                   taskMinites={taskState.todayTasks[key].taskMinites}
                   taskMinitesChange={(event) =>
                     taskMinitesChangedHandler(
@@ -424,9 +334,6 @@ const TodoApp = (props) => {
                     toggleDoneHandler(event, taskState.todayTasks[key].id)
                   }
                   delete={() => deleteTaskHandler(key)}
-                  rankChange={(event) =>
-                    rankChangedHandler(event, taskState.todayTasks[key].id)
-                  }
                   change={(event) =>
                     nameChangedHandler(event, taskState.todayTasks[key].id)
                   }
