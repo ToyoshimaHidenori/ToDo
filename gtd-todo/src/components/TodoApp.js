@@ -5,6 +5,7 @@ import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
+import { TwitterShareButton } from "react-twitter-embed";
 import "react-circular-progressbar/dist/styles.css";
 import "firebase/auth";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -260,18 +261,13 @@ const TodoApp = (props) => {
       </div>
 
       <div style={tweetButton}>
-        <a
+        <TwitterShareButton
+          url={"https://neutodo.com"}
+          options={{
+            text: "✨✨今日のタスクが完了しました✨✨#neutodo",
+          }}
           id="tweetButton"
-          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-          className="twitter-share-button"
-          data-size="large"
-          data-text={"✨✨今日のタスクが完了しました✨✨"}
-          data-url="https://neutodo.com/gtd-todo/build/index.html"
-          data-hashtags="NeuToDo"
-          data-show-count="false"
-        >
-          Tweet
-        </a>
+        />
       </div>
 
       <progress
