@@ -29,7 +29,6 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
 
 let loading = false;
 const toggleLoading = () => {

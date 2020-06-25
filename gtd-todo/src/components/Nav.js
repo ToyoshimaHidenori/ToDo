@@ -18,7 +18,10 @@ const Nav = (props) => {
     <div>
       <ul className="nav">
         <div className="navInner">
-          <li className="logo">{props.children}</li>
+          <li className="logo">
+            <Link to="/">{props.children}</Link>
+          </li>
+
           <Link to="/">
             <li>
               <svg

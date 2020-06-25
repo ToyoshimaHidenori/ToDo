@@ -31,7 +31,7 @@
 }
 
 @media screen and (max-width: 360px) {
-  .nav li.logo {
+  .nav li.logo a {
     font-size: normal;
   }
   .nav {
@@ -40,24 +40,23 @@
   }
 }
 @media screen and (min-width: 360px) {
-  .nav li.logo {
+  .nav li.logo a {
     font-size: large;
   }
 }
-
 .nav li.logo {
+  text-align: left;
+  margin-right: auto;
+}
+
+.nav li.logo a {
   text-align: left;
   margin-right: auto;
   font-weight: bolder;
   font-family: "Average Sans", sans-serif;
   color: #1c64ff;
   text-shadow: 0px 0px 5px #6595d8;
-  /* margin-right: auto;
-  font-family: "Roboto", sans-serif;
-  font-size: 1rem;
-  color: dimgray;
-  font-weight: 900;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), -2px -2px 4px white; */
+  text-decoration: none;
 }
 
 .nav li:not(.logo) {
