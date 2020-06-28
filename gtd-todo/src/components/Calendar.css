@@ -5,10 +5,10 @@ body {
   z-index: 0;
 }
 
-.header {
-  font-family: "Varela Round", sans-serif;
-  font-weight: 100;
+.Calendar .header {
   margin-bottom: 40px;
+  margin: 15px;
+  margin-top: 0px;
 }
 
 .Calendar h1 {
@@ -17,22 +17,20 @@ body {
   font-size: x-large;
   font-weight: bolder;
   margin: 10px;
-  margin-left: 20px;
+  margin-left: 0px;
   font-family: "Average Sans", sans-serif;
   color: #1c64ff;
   text-shadow: 0px 0px 5px #6595d8;
 }
 .Calendar h1 button {
-  text-align: left;
   font-size: normal;
   font-weight: bolder;
   border: solid 2px #1c64ff;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: #e0dfea;
-  box-shadow: 8px 8px 10px #cfced4, -8px -8px 10px #f0f0f0;
+  box-shadow: 4px 4px 6px #cfced4, -4px -4px 6px #f0f0f0;
   padding: 4px;
-  margin: 0px;
-  margin-left: 20px;
+  margin-left: 10px;
   font-family: "Average Sans", sans-serif;
   color: #1c64ff;
   text-shadow: 0px 0px 5px #6595d8;

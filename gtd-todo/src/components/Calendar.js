@@ -254,43 +254,44 @@ const Calendar = (props) => {
 
   return (
     <div className="Calendar">
-      <h1>
-        {selectedDate.getFullYear().toString() +
-          "年 " +
-          (selectedDate.getMonth() + 1).toString() +
-          "月 " +
-          selectedDate.getDate().toString() +
-          "日"}
-        {sameDateOnly(selectedDate, todayDate) ? null : (
-          <button
-            onClick={() => {
-              selectDate(todayDate);
-            }}
-          >
-            Today
-          </button>
-        )}
-      </h1>
+      <div className="header">
+        <h1>
+          {selectedDate.getFullYear().toString() +
+            "年 " +
+            (selectedDate.getMonth() + 1).toString() +
+            "月 " +
+            selectedDate.getDate().toString() +
+            "日"}
+          {sameDateOnly(selectedDate, todayDate) ? null : (
+            <button
+              onClick={() => {
+                selectDate(todayDate);
+              }}
+            >
+              Today
+            </button>
+          )}
+        </h1>
 
-      <CalendarArea
-        onChange={selectDate}
-        value={selectedDate}
-        nextAriaLabel="next"
-        nextLabel="　　›　　"
-        prevLabel="　　‹　　"
-        next2Label="　»　"
-        prev2Label="　«　"
-        // tileContent={({ date, view }) =>
-        //   view === "month" && date.getDay() === 0 ? <p>It's Sunday!</p> : null
-        // }
-      />
+        <CalendarArea
+          onChange={selectDate}
+          value={selectedDate}
+          nextAriaLabel="next"
+          nextLabel="　　›　　"
+          prevLabel="　　‹　　"
+          next2Label="　»　"
+          prev2Label="　«　"
+          // tileContent={({ date, view }) =>
+          //   view === "month" && date.getDay() === 0 ? <p>It's Sunday!</p> : null
+          // }
+        />
 
-      <progress
-        id="progressbar"
-        max={progressState[1]}
-        value={progressState[0]}
-      ></progress>
-
+        <progress
+          id="progressbar"
+          max={progressState[1]}
+          value={progressState[0]}
+        ></progress>
+      </div>
       <TransitionGroup>
         {Object.keys(taskState.todayTasks).map((key) => {
           if (!taskState.todayTasks[key].isDone) {
