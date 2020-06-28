@@ -19,7 +19,7 @@ const TodoApp = (props) => {
         id: "asdfas",
         name: "Now loading ...",
         isDone: false,
-        endTime: Date.parse(2020 / 10 / 21),
+        endTime: Date.now(),
         taskMinites: 0,
         rank: "A",
       },
@@ -55,7 +55,7 @@ const TodoApp = (props) => {
                 id: "asdfas",
                 name: "NeuToDoにアクセスする",
                 isDone: true,
-                endTime: null,
+                endTime: Date.now(),
                 notificationTime: null,
                 taskMinites: 10,
               },
@@ -64,7 +64,7 @@ const TodoApp = (props) => {
                 name: "Task を登録する",
                 isDone: false,
                 endTime: null,
-                notificationTime: null,
+                notificationTime: Date.now() + 1000 * 60 * 24,
                 taskMinites: 20,
               },
             });
@@ -116,7 +116,8 @@ const TodoApp = (props) => {
         id: key,
         name: "",
         isDone: false,
-        endTime: Date(),
+        endTime: null,
+        notificationTime: null,
         taskMinites: 30,
         rank: "A",
       });
@@ -124,6 +125,12 @@ const TodoApp = (props) => {
   };
 
   const toggleDoneHandler = (event, key) => {
+    let now = new Date();
+    firebase
+      .database()
+      .ref("users/" + userId + "/todayTasks/" + key + "/endTime")
+      .set(taskState.todayTasks[key].isDone ? null : Date.now());
+
     firebase
       .database()
       .ref("users/" + userId + "/todayTasks/" + key + "/isDone")
@@ -199,6 +206,45 @@ const TodoApp = (props) => {
       left: "-100px",
       top: "-100px",
     };
+  }
+
+  //20200628<20200701 true
+  function lowerThanDateOnly(date1, date2) {
+    var year1 = date1.getFullYear();
+    var month1 = date1.getMonth() + 1;
+    var day1 = date1.getDate();
+
+    var year2 = date2.getFullYear();
+    var month2 = date2.getMonth() + 1;
+    var day2 = date2.getDate();
+
+    if (year1 == year2) {
+      if (month1 == month2) {
+        return day1 < day2;
+      } else {
+        return month1 < month2;
+      }
+    } else {
+      return year1 < year2;
+    }
+  }
+
+  //20200628<20200701 false
+  function sameDateOnly(date1, date2) {
+    var year1 = date1.getFullYear();
+    var month1 = date1.getMonth() + 1;
+    var day1 = date1.getDate();
+
+    var year2 = date2.getFullYear();
+    var month2 = date2.getMonth() + 1;
+    var day2 = date2.getDate();
+
+    if (year1 == year2) {
+      if (month1 == month2) {
+        return day1 == day2;
+      }
+    }
+    return false;
   }
 
   return (
@@ -279,34 +325,37 @@ const TodoApp = (props) => {
       <TransitionGroup>
         {Object.keys(taskState.todayTasks).map((key) => {
           if (!taskState.todayTasks[key].isDone) {
-            return (
-              <CSSTransition
-                key={taskState.todayTasks[key].id}
-                timeout={500}
-                classNames="hi"
-              >
-                <Task
+            let date = new Date(taskState.todayTasks[key].notificationTime);
+            let todayDate = new Date();
+            if (!lowerThanDateOnly(todayDate, date))
+              return (
+                <CSSTransition
                   key={taskState.todayTasks[key].id}
-                  name={taskState.todayTasks[key].name}
-                  isDone={taskState.todayTasks[key].isDone}
-                  endTime={taskState.todayTasks[key].endTime}
-                  taskMinites={taskState.todayTasks[key].taskMinites}
-                  taskMinitesChange={(event) =>
-                    taskMinitesChangedHandler(
-                      event,
-                      taskState.todayTasks[key].id
-                    )
-                  }
-                  done={(event) =>
-                    toggleDoneHandler(event, taskState.todayTasks[key].id)
-                  }
-                  delete={() => deleteTaskHandler(key)}
-                  change={(event) =>
-                    nameChangedHandler(event, taskState.todayTasks[key].id)
-                  }
-                />
-              </CSSTransition>
-            );
+                  timeout={500}
+                  classNames="hi"
+                >
+                  <Task
+                    key={taskState.todayTasks[key].id}
+                    name={taskState.todayTasks[key].name}
+                    isDone={taskState.todayTasks[key].isDone}
+                    endTime={taskState.todayTasks[key].endTime}
+                    taskMinites={taskState.todayTasks[key].taskMinites}
+                    taskMinitesChange={(event) =>
+                      taskMinitesChangedHandler(
+                        event,
+                        taskState.todayTasks[key].id
+                      )
+                    }
+                    done={(event) =>
+                      toggleDoneHandler(event, taskState.todayTasks[key].id)
+                    }
+                    delete={() => deleteTaskHandler(key)}
+                    change={(event) =>
+                      nameChangedHandler(event, taskState.todayTasks[key].id)
+                    }
+                  />
+                </CSSTransition>
+              );
           }
         })}
       </TransitionGroup>
@@ -316,34 +365,39 @@ const TodoApp = (props) => {
       <TransitionGroup>
         {Object.keys(taskState.todayTasks).map((key) => {
           if (taskState.todayTasks[key].isDone) {
-            return (
-              <CSSTransition
-                key={taskState.todayTasks[key].id}
-                timeout={500}
-                classNames="hi"
-              >
-                <Task
-                  key={taskState.todayTasks[key].id}
-                  name={taskState.todayTasks[key].name}
-                  isDone={taskState.todayTasks[key].isDone}
-                  endTime={taskState.todayTasks[key].endTime}
-                  taskMinites={taskState.todayTasks[key].taskMinites}
-                  taskMinitesChange={(event) =>
-                    taskMinitesChangedHandler(
-                      event,
-                      taskState.todayTasks[key].id
-                    )
-                  }
-                  done={(event) =>
-                    toggleDoneHandler(event, taskState.todayTasks[key].id)
-                  }
-                  delete={() => deleteTaskHandler(key)}
-                  change={(event) =>
-                    nameChangedHandler(event, taskState.todayTasks[key].id)
-                  }
-                />
-              </CSSTransition>
-            );
+            let date = new Date(taskState.todayTasks[key].endTime);
+            let now = new Date();
+            if (date != "Invalid Date") {
+              if (sameDateOnly(date, now))
+                return (
+                  <CSSTransition
+                    key={taskState.todayTasks[key].id}
+                    timeout={500}
+                    classNames="hi"
+                  >
+                    <Task
+                      key={taskState.todayTasks[key].id}
+                      name={taskState.todayTasks[key].name}
+                      isDone={taskState.todayTasks[key].isDone}
+                      endTime={taskState.todayTasks[key].endTime}
+                      taskMinites={taskState.todayTasks[key].taskMinites}
+                      taskMinitesChange={(event) =>
+                        taskMinitesChangedHandler(
+                          event,
+                          taskState.todayTasks[key].id
+                        )
+                      }
+                      done={(event) =>
+                        toggleDoneHandler(event, taskState.todayTasks[key].id)
+                      }
+                      delete={() => deleteTaskHandler(key)}
+                      change={(event) =>
+                        nameChangedHandler(event, taskState.todayTasks[key].id)
+                      }
+                    />
+                  </CSSTransition>
+                );
+            }
           }
         })}
       </TransitionGroup>

@@ -12,6 +12,7 @@
     "firebase": "^7.15.1",
     "react": "^16.13.1",
     "react-animate-height": "^2.0.21",
+    "react-calendar": "^3.1.0",
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

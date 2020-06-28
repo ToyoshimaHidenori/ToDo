@@ -47,7 +47,7 @@ const Nav = (props) => {
             </li>
           </Link>
 
-          <Link to="/home/calender">
+          <Link to="/home/calendar">
             <li>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

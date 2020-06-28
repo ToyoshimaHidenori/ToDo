@@ -63,22 +63,24 @@
   }
 }
 
-.Task .Trash {
+.Task button.Trash {
   animation: showr 2s;
+  border-radius: 16px;
   background: #e0dfea;
   box-shadow: 3px 3px 5px #cfced4, -3px -3px 5px #f0f0f0;
   font-size: 0.6em;
+  border: none;
   color: #aaaaaa;
   margin-left: 20px;
   position: relative;
   top: 3px;
   padding: 3px 3px 2px 3px;
 }
-.Task .Trash:hover {
+.Task button.Trash:hover {
   color: rgb(117, 0, 0);
 }
 
-.Task button {
+.Task button.CheckBox {
   animation: showb 2s;
   border-radius: 16px;
   /* background: #e0dfea;
@@ -98,7 +100,7 @@
   transition-duration: 0.7s;
 }
 
-.Task button:hover {
+.Task button.CheckBox:hover {
   /* background: linear-gradient(145deg, #f0effa, #cac9d3);
 	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
   background: linear-gradient(145deg, #cac9d3, #f0effa);
@@ -119,7 +121,7 @@
   color: #026efa;
 }
 
-.Task button:active {
+.Task button.CheckBox:active {
   background: #e0dfea;
   box-shadow: inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
 }
@@ -159,7 +161,7 @@
   .Task input {
     font-size: 2em;
   }
-  .Task button {
+  .Task button.CheckBox {
     font-size: 1.4em;
   }
 }
@@ -170,7 +172,7 @@
   .Task input {
     font-size: 2em;
   }
-  .Task button {
+  .Task button.CheckBox {
     font-size: 1.4em;
   }
 }

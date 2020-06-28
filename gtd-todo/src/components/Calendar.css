@@ -1,0 +1,329 @@
+body {
+  margin: 0;
+  background: #e0dfea;
+  color: #6595d8;
+  z-index: 0;
+}
+
+.header {
+  font-family: "Varela Round", sans-serif;
+  font-weight: 100;
+  margin-bottom: 40px;
+}
+
+.Calendar h1 {
+  justify-content: center;
+  text-align: left;
+  font-size: x-large;
+  font-weight: bolder;
+  margin: 10px;
+  margin-left: 20px;
+  font-family: "Average Sans", sans-serif;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+}
+.Calendar h1 button {
+  text-align: left;
+  font-size: normal;
+  font-weight: bolder;
+  border: solid 2px #1c64ff;
+  border-radius: 20px;
+  background-color: #e0dfea;
+  box-shadow: 8px 8px 10px #cfced4, -8px -8px 10px #f0f0f0;
+  padding: 4px;
+  margin: 0px;
+  margin-left: 20px;
+  font-family: "Average Sans", sans-serif;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+}
+
+.hi {
+  margin: 0px;
+}
+
+.hi-enter {
+  opacity: 0;
+  max-height: 0px;
+}
+
+.hi-enter-active {
+  opacity: 1;
+  max-height: 120px;
+  transition: 0.3s;
+}
+
+.hi-enter-done {
+  opacity: 1;
+}
+
+.hi-exit {
+  max-height: 1200px;
+  opacity: 1;
+}
+
+.hi-exit-active {
+  opacity: 0;
+  transition: 1s;
+  max-height: 0px;
+}
+
+.hi-exit-done {
+  opacity: 0;
+  max-height: 0px;
+}
+
+.Calendar {
+  text-align: center;
+  background: #e0dfea;
+  font-family: "Average Sans", sans-serif;
+}
+
+.react-calendar {
+  text-align: center;
+  margin: auto;
+  margin-bottom: 30px;
+  z-index: 100;
+  border-radius: 10px;
+  background-color: #e0dfea;
+  box-shadow: 8px 8px 10px #cfced4, -8px -8px 10px #f0f0f0;
+  max-width: 600px;
+}
+
+.react-calendar button {
+  /* animation: show 1s; */
+  background: #e0dfea;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  border-radius: 10px;
+  padding: 5px 5px 5px 5px;
+  font-size: 1em;
+  border-style: none;
+  outline: none;
+  /* box-shadow: 0px 2px 3px #bab9c2, -0px -2px 3px #ffffff; */
+
+  transition-duration: 0.7s;
+}
+
+button.react-calendar__tile--active {
+  background: #e0dfea;
+  box-shadow: inset 2px 2px 4px #afaeb7, inset -2px -2px 4px #ffffff;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+  font-weight: 700;
+}
+
+button.react-calendar__month-view__days__day--neighboringMonth {
+  color: #838383;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+  color: #1c64ff;
+}
+
+.react-calendar button:hover {
+  /* background: linear-gradient(145deg, #f0effa, #cac9d3);
+	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: linear-gradient(145deg, #cac9d3, #f0effa);
+  box-shadow: 0px 2px 3px #bab9c2, -0px -2px 3px #ffffff;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+}
+
+.react-calendar button:active {
+  background: #e0dfea;
+  box-shadow: inset 2px 2px 4px #afaeb7, inset -2px -2px 4px #ffffff;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+}
+
+.react-calendar button:focus {
+  background: #e0dfea;
+  box-shadow: inset 2px 2px 4px #afaeb7, inset -2px -2px 4px #ffffff;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+  font-weight: 700;
+}
+
+svg {
+  fill: currentColor;
+}
+
+@keyframes show {
+  0% {
+    box-shadow: 0px 0px 30px #bab9c2, 0px 0px 30px #ffffff;
+  }
+  100% {
+    box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff;
+  }
+}
+
+a.twitter-share-button,
+.Calendar button.Button {
+  animation: show 1s;
+  border-radius: 12px;
+  /* background: #e0dfea;
+	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: #e0dfea;
+  box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff;
+  font-size: 1.4em;
+  color: #6595d8;
+  margin: 15px;
+  padding: 7px 20px 7px 20px;
+  border-style: none;
+  outline: none;
+
+  transition-duration: 0.7s;
+}
+
+a.twitter-share-button,
+.Calendar button.Button:hover {
+  /* background: linear-gradient(145deg, #f0effa, #cac9d3);
+	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
+  background: linear-gradient(145deg, #cac9d3, #f0effa);
+  box-shadow: 5px 5px 10px #cccbd5, -5px -5px 10px #f4f3ff;
+  color: #1c64ff;
+  text-shadow: 0px 0px 5px #6595d8;
+}
+
+.Calendar button.Button:active {
+  background: #e0dfea;
+  box-shadow: inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
+}
+
+@keyframes showp {
+  0% {
+    box-shadow: 0px 0px 0px #afaeb7, 0px 0px 0px #ffffff,
+      inset 0px 0px 0px #afaeb7, inset 0px 0px 0px #ffffff;
+  }
+  100% {
+    box-shadow: 10px 10px 15px #bab9c2, -10px -10px 15px #ffffff,
+      inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
+  }
+}
+
+progress {
+  animation: showp 1s;
+  display: block; /* default: inline-block */
+  color: #1c64ff;
+  margin: 2em auto;
+  padding: 4px;
+  border: 2px solid #e0dfea;
+  box-shadow: 10px 10px 15px #bab9c2, -10px -10px 15px #ffffff,
+    inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
+  border-radius: 10px;
+  transition-duration: 1.2s;
+  width: 95%;
+}
+
+@media screen and (max-width: 768px) {
+  progress {
+    display: none;
+    width: 68%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  progress {
+    width: 68%;
+  }
+  div.ProgressOuter {
+    width: 30%;
+    margin: 30px 34% 10px 34%;
+    display: none;
+  }
+}
+@media screen and (min-width: 1024px) {
+  progress {
+    width: 68%;
+  }
+  div.ProgressOuter {
+    width: 30%;
+    margin: 30px 34% 10px 34%;
+    display: none;
+  }
+}
+progress::-moz-progress-bar {
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff,
+    inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
+}
+/* webkit */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  progress {
+    height: 25px;
+  }
+}
+progress::-webkit-progress-bar {
+  background: transparent;
+  color: #1c64ff;
+  transition-duration: 1.2s;
+}
+progress::-webkit-progress-value {
+  border-radius: 12px;
+  background: #507cda;
+  box-shadow: inset 3px 3px 3px #96b8ec, inset -3px -3px 3px #6569c2;
+  transition-duration: 1.2s;
+}
+
+#container {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.CircularProgressbar + div {
+  border-radius: 50%;
+  box-shadow: inset 3px 3px 6px #5061be, inset -3px -3px 6px #e6e5ff;
+}
+
+div.ProgressInner {
+  border: 2vw solid #e0dfea;
+  height: 63%;
+  width: 63%;
+  border-radius: 50%;
+  box-shadow: 3px 3px 8px #6b77c0, -3px -3px 8px #bdcee9,
+    inset 3px 3px 6px #ffffff, inset -3px -3px 6px #9f9ea6;
+}
+
+div.ProgressInnerInner {
+  padding-top: 20%;
+  padding-bottom: 0%;
+  margin-bottom: 0px;
+  width: 100%;
+}
+
+@keyframes showpo {
+  0% {
+    box-shadow: 0px 0px 30px #bab9c2, 0px 0px 30px #ffffff;
+  }
+  100% {
+    box-shadow: 15px 15px 15px #afaeb7, -15px -15px 15px #ffffff;
+  }
+}
+
+@keyframes donepo {
+  0% {
+    box-shadow: 15px 15px 15px #8f94b3, -15px -15px 15px #ffffff;
+  }
+  50% {
+    box-shadow: 10px 10px 40px #3950c2, -10px -10px 40px #b7dcff;
+  }
+  100% {
+    box-shadow: 15px 15px 15px #8f94b3, -15px -15px 15px #ffffff;
+  }
+}
+
+div.ProgressOuter {
+  animation: showpo 2s;
+  width: 60%;
+  margin: 10px 18% 10px 18%;
+  border-radius: 50%;
+  border: 5px solid #e0dfea;
+  background: #e0dfea;
+  box-shadow: 15px 15px 15px #afaeb7, -15px -15px 15px #ffffff,
+    inset 5px 5px 9px #afaeb7, inset -5px -5px 9px #ffffff;
+}

@@ -13,6 +13,7 @@ import Nav from "./Nav";
 import Landing from "./Landing";
 import Login from "./Login";
 import Policy from "./Policy";
+import Calendar from "./Calendar";
 import "./App.css";
 import firebase from "firebase";
 import "firebase/auth";
@@ -53,8 +54,8 @@ export default function App() {
             <Route path="/guest/home">
               <TodoApp />
             </Route>
-            <PrivateRoute path="/home/calender" currentUser={currentUser}>
-              <p>coming soon!</p>
+            <PrivateRoute path="/home/calendar" currentUser={currentUser}>
+              <Calendar firebase={firebase} />
             </PrivateRoute>
             <PrivateRoute path="/home" currentUser={currentUser}>
               <TodoApp firebase={firebase} />
