@@ -300,7 +300,7 @@ const Calendar = (props) => {
               (sameDateOnly(selectedDate, todayDate) &&
                 lowerThanDateOnly(date, selectedDate)) ||
               (sameDateOnly(selectedDate, date) &&
-                !lowerThanDateOnly(date, selectedDate))
+                !lowerThanDateOnly(selectedDate, todayDate))
             )
               return (
                 <CSSTransition

@@ -55,7 +55,11 @@ const Login = (props) => {
               </svg>{" "}
               Log in with Twitter
             </button>
-            <img src={google_normal} onClick={() => loginWithGoogle(history)} />
+            <img
+              src={google_normal}
+              alt="google login"
+              onClick={() => loginWithGoogle(history)}
+            />
 
             <p>
               Twitterでのログインをおすすめします。今後Twitterでの機能の追加を予定しています。
