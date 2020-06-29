@@ -5,13 +5,18 @@ const Task = (props) => {
   return (
     <div className={"Task"}>
       <div className={props.isDone ? "Checked" : "Unchecked"}>
-        <button className="CheckBox" onClick={props.done}>
+        <button
+          className="CheckBox"
+          aria-label="Toggle done"
+          onClick={props.done}
+        >
           <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M21 6.285l-11.16 12.733-6.84-6.018 1.319-1.49 5.341 4.686 9.865-11.196 1.475 1.285z" />
           </svg>
         </button>
         <input
           type="text"
+          id="task name"
           placeholder="New task"
           onChange={props.change}
           value={props.name}
@@ -24,6 +29,7 @@ const Task = (props) => {
         <div className="InputNum">
           <input
             type="number"
+            id="task minites"
             onChange={props.taskMinitesChange}
             value={props.taskMinites}
           />
@@ -44,7 +50,11 @@ const Task = (props) => {
           onChange={props.endTimeChange}
           value={props.endTime}
         /> */}
-        <button className="Trash" onClick={props.delete}>
+        <button
+          className="Trash"
+          aria-label="Remove Task"
+          onClick={props.delete}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
