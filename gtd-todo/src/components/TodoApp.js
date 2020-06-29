@@ -109,6 +109,7 @@ const TodoApp = (props) => {
 
   const addTaskHandler = () => {
     const key = Math.random().toString(32).substring(2);
+    let now = new Date();
     firebase
       .database()
       .ref("users/" + userId + "/todayTasks/" + key)
@@ -117,7 +118,7 @@ const TodoApp = (props) => {
         name: "",
         isDone: false,
         endTime: null,
-        notificationTime: null,
+        notificationTime: Date.now(),
         taskMinites: 30,
         rank: "A",
       });
