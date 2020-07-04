@@ -77,10 +77,28 @@ const TodoApp = (props) => {
         } else {
           let allTaskMin = 0;
           let doneTaskMin = 0;
+          let todayDate = new Date();
+          //   Object.keys(snapshot.val()).map((key) => {
+          //     allTaskMin += Number(snapshot.val()[key].taskMinites);
+          //     if (snapshot.val()[key].isDone) {
+          //       doneTaskMin += Number(snapshot.val()[key].taskMinites);
+          //     }
+          //   });
+
           Object.keys(snapshot.val()).map((key) => {
-            allTaskMin += Number(snapshot.val()[key].taskMinites);
-            if (snapshot.val()[key].isDone) {
-              doneTaskMin += Number(snapshot.val()[key].taskMinites);
+            let endDate = new Date(snapshot.val()[key].endTime);
+            let notifyDate = new Date(snapshot.val()[key].notificationTime);
+            if (!lowerThanDateOnly(todayDate, notifyDate)) {
+              if (!snapshot.val()[key].isDone) {
+                allTaskMin += Number(snapshot.val()[key].taskMinites);
+              }
+              if (
+                snapshot.val()[key].isDone &&
+                sameDateOnly(endDate, todayDate)
+              ) {
+                doneTaskMin += Number(snapshot.val()[key].taskMinites);
+                allTaskMin += Number(snapshot.val()[key].taskMinites);
+              }
             }
           });
           setProgressState([doneTaskMin, allTaskMin]);
@@ -91,6 +109,27 @@ const TodoApp = (props) => {
     todayTasksRef.on("value", function (snapshot) {
       if (snapshot.val() != null) {
         setTaskState({ todayTasks: snapshot.val() });
+
+        let allTaskMin = 0;
+        let doneTaskMin = 0;
+        let todayDate = new Date();
+        Object.keys(snapshot.val()).map((key) => {
+          let endDate = new Date(snapshot.val()[key].endTime);
+          let notifyDate = new Date(snapshot.val()[key].notificationTime);
+          if (!lowerThanDateOnly(todayDate, notifyDate)) {
+            if (!snapshot.val()[key].isDone) {
+              allTaskMin += Number(snapshot.val()[key].taskMinites);
+            }
+            if (
+              snapshot.val()[key].isDone &&
+              sameDateOnly(endDate, todayDate)
+            ) {
+              doneTaskMin += Number(snapshot.val()[key].taskMinites);
+              allTaskMin += Number(snapshot.val()[key].taskMinites);
+            }
+          }
+        });
+        setProgressState([doneTaskMin, allTaskMin]);
       } else {
         setTaskState({ todayTasks: "" });
       }
