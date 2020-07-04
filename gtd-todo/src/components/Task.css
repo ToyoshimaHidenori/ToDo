@@ -6,7 +6,7 @@
     box-shadow: 0px 0px 0px #bab9c2, 0px 0px 0px #ffffff;
   }
   100% {
-    box-shadow: 10px 10px 15px #bab9c2, -10px -10px 15px #ffffff;
+    box-shadow: 5px 5px 10px #bab9c2, -5px -5px 10px #ffffff;
   }
 }
 
@@ -24,7 +24,7 @@
     color: #dfdfdf;
   }
   100% {
-    box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff,
+    box-shadow: 5px 5px 10px #bab9c2, -5px -5px 10px #ffffff,
       inset 2px 2px 5px #4c7ab6, inset -2px -2px 5px #8ebfff;
     background-color: #4e98f8;
     color: #dfdfdf;
@@ -83,17 +83,15 @@
 .Task button.CheckBox {
   animation: showb 2s;
   border-radius: 16px;
-  /* background: #e0dfea;
-  box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
   background: #e0dfea;
-  box-shadow: 10px 10px 15px #bab9c2, -10px -10px 15px #ffffff;
+  box-shadow: 5px 5px 10px #bab9c2, -5px -5px 10px #ffffff;
   font-size: 1em;
   font-weight: bold;
   color: #aaaaaa;
   margin-bottom: 0px;
   margin-top: 5px;
-  margin-left: 10px;
-  margin-right: 35px;
+  margin-left: 5px;
+  margin-right: 15px;
   padding: 5px 5px 2px 5px;
   border-style: none;
   outline: none;
@@ -101,8 +99,6 @@
 }
 
 .Task button.CheckBox:hover {
-  /* background: linear-gradient(145deg, #f0effa, #cac9d3);
-	box-shadow: 16px 16px 32px #8f8f96, -16px -16px 32px #ffffff; */
   background: linear-gradient(145deg, #cac9d3, #f0effa);
   box-shadow: 5px 5px 10px #cccbd5, -5px -5px 10px #f4f3ff;
   color: #026efa;
@@ -111,7 +107,7 @@
 .Task .Checked .CheckBox {
   animation: showbc 2s;
   color: #dfdfdf;
-  box-shadow: 15px 15px 30px #bab9c2, -15px -15px 30px #ffffff,
+  box-shadow: 5px 5px 10px #bab9c2, -5px -5px 10px #ffffff,
     inset 2px 2px 5px #4c7ab6, inset -2px -2px 5px #8ebfff;
   background-color: #4e98f8;
 }
@@ -132,8 +128,7 @@
   border-radius: 12px;
   background: #e0dfea;
   box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff;
-  padding: 8px;
-  padding-bottom: 13px;
+  padding: 5px 0px 5px 0px;
   margin: 20px 15px 20px 15px;
   color: #999999;
   border: 3px solid #e0dfea;
@@ -146,7 +141,7 @@
   border-radius: 36px;
   background: #e0dfea;
   box-shadow: 5px 5px 9px #afaeb7, -5px -5px 9px #ffffff;
-  padding: 8px;
+  padding: 5px;
   margin: 20px 15px 20px 15px;
 
   border: 3px solid #658bdd;
@@ -188,7 +183,7 @@
   border-radius: 11px;
   background: #e0dfea;
   box-shadow: inset 2px 2px 4px #c6c5ce, inset -2px -2px 4px #fcfcfc;
-  font-size: 1.25em;
+  font-size: 1.1em;
   color: #026efa;
   text-shadow: 0px 0px 5px #6595d8;
   margin: 0px;
@@ -206,7 +201,7 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 300px;
-  width: 70%;
+  width: 77%;
 }
 .Task .Checked input,
 .Task .Checked select {

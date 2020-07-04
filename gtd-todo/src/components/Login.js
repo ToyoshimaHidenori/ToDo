@@ -3,7 +3,7 @@ import { BrowserRouter as Router, useHistory, Link } from "react-router-dom";
 import google_normal from "../img/btn_google_signin_light_normal_web.png";
 import "./Login.css";
 var showButtons = true;
-const Login = (props) => {
+export default function Login(props) {
   const [Loading, setLoading] = useState(false);
   const [isAgree, setIsAgree] = useState(false);
   const firebase = props.firebase;
@@ -46,7 +46,7 @@ const Login = (props) => {
             <h2>ログインしてはじめる</h2>
             {isAgree && (
               <div>
-                <button onClick={() => loginWithTwitter(history)}>
+                <button onClick={() => loginWithTwitter()}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -60,7 +60,7 @@ const Login = (props) => {
                 <img
                   src={google_normal}
                   alt="google login"
-                  onClick={() => loginWithGoogle(history)}
+                  onClick={() => loginWithGoogle()}
                 />
                 <p>
                   <Link to="/policy" style={{ color: "gray" }}>
@@ -97,6 +97,4 @@ const Login = (props) => {
       </div>
     );
   }
-};
-
-export default Login;
+}

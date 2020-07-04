@@ -15,7 +15,7 @@ import CSSTransition from "react-transition-group/CSSTransition";
 const TodoApp = (props) => {
   const [taskState, setTaskState] = useState({
     todayTasks: {
-      asdfas: {
+      loading: {
         id: "asdfas",
         name: "Now loading ...",
         isDone: false,
@@ -42,6 +42,7 @@ const TodoApp = (props) => {
       firebase.database().goOffline()
     );
   });
+
   useEffect(() => {
     firebaseDb
       .ref("users/" + userId + "/todayTasks")
@@ -52,7 +53,7 @@ const TodoApp = (props) => {
             .ref("users/" + userId + "/todayTasks")
             .set({
               asdfas: {
-                id: "asdfas",
+                id: "firsttask",
                 name: "NeuToDoにアクセスする",
                 isDone: true,
                 endTime: Date.now(),
@@ -60,7 +61,7 @@ const TodoApp = (props) => {
                 taskMinites: 10,
               },
               afffdjkdk: {
-                id: "afffdjkdk",
+                id: "secondtask",
                 name: "Task を登録する",
                 isDone: false,
                 endTime: null,
@@ -96,16 +97,17 @@ const TodoApp = (props) => {
     });
   }, []);
 
-  useEffect(() => {
-    var connectedRef = firebaseDb.ref(".info/connected");
-    // connectedRef.on("value", function (snap) {
-    //   if (snap.val() === true) {
-    //     alert("connect" + firebase.auth().currentUser.uid);
-    //   } else {
-    //     alert("disconnet" + firebase.auth().currentUser.uid);
-    //   }
-    // });
-  });
+  //接続確認
+  //   useEffect(() => {
+  //     var connectedRef = firebaseDb.ref(".info/connected");
+  //     // connectedRef.on("value", function (snap) {
+  //     //   if (snap.val() === true) {
+  //     //     alert("connect" + firebase.auth().currentUser.uid);
+  //     //   } else {
+  //     //     alert("disconnet" + firebase.auth().currentUser.uid);
+  //     //   }
+  //     // });
+  //   });
 
   const addTaskHandler = () => {
     const key = Math.random().toString(32).substring(2);
@@ -183,9 +185,13 @@ const TodoApp = (props) => {
     let allTaskMin = 0;
     let doneTaskMin = 0;
     Object.keys(taskState.todayTasks).map((key) => {
-      allTaskMin += Number(taskState.todayTasks[key].taskMinites);
-      if (taskState.todayTasks[key].isDone) {
-        doneTaskMin += Number(taskState.todayTasks[key].taskMinites);
+      let date = new Date(taskState.todayTasks[key].notificationTime);
+      let todayDate = new Date();
+      if (!lowerThanDateOnly(todayDate, date)) {
+        allTaskMin += Number(taskState.todayTasks[key].taskMinites);
+        if (taskState.todayTasks[key].isDone && sameDateOnly(date, todayDate)) {
+          doneTaskMin += Number(taskState.todayTasks[key].taskMinites);
+        }
       }
     });
     setProgressState([doneTaskMin, allTaskMin]);
@@ -361,7 +367,9 @@ const TodoApp = (props) => {
         })}
       </TransitionGroup>
       <div>
-        <button onClick={addTaskHandler}>Add task</button>
+        <button className="AddTask" onClick={addTaskHandler}>
+          Add task
+        </button>
       </div>
       <TransitionGroup>
         {Object.keys(taskState.todayTasks).map((key) => {

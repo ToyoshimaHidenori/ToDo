@@ -3,7 +3,7 @@ import "./Task.css";
 
 const Task = (props) => {
   return (
-    <div className={"Task"}>
+    <div className="Task">
       <div className={props.isDone ? "Checked" : "Unchecked"}>
         <button
           className="CheckBox"
@@ -16,7 +16,6 @@ const Task = (props) => {
         </button>
         <input
           type="text"
-          id="task name"
           placeholder="New task"
           onChange={props.change}
           value={props.name}
